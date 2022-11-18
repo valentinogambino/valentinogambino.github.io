@@ -1,0 +1,40 @@
+#add-city-form {
+    text-align: center;
+}
+
+#add-city-form-label {
+    padding: 10px;
+    font-size: 1em;
+    background-color: white;
+    color: black;
+    border-radius: 5px;
+}
+
+#add-city-form-button {
+    margin: 10px 0px 0px 85px;
+    padding: 10px;
+    font-size: 1em;
+    font-weight: bold;
+    background-color: var(--color-theme);
+    color: white;
+    border: 0px;
+    border-radius: 10px;
+}
+
+#success, #error, #warning{
+    display: none;
+    margin: 15px 350px 15px 350px;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    border-radius: 20px;
+    background-color: #28a745;
+}
+
+#error {
+    background-color: #dc3545;
+}
+
+#warning {
+    background-color: #ffc107;
+}

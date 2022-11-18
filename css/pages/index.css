@@ -1,0 +1,32 @@
+#select-city {
+    height: 45px;
+    width: 300px;
+    padding: 10px;
+    text-align: left;
+    font-size: 1rem;
+    background-color: white;
+    color: black;
+    border-radius: 5px;
+    text-transform: capitalize;
+}
+
+#consult {
+    padding: 10px;
+    text-align: center;
+    font-size: 1em;
+    font-weight: bold;
+    background-color: var(--color-theme);
+    color: white;
+    border: 0px;
+    border-radius: 10px;
+}
+
+#info-card {
+    display: none;
+    font-weight: bold;
+    text-align: center;
+    margin: 30px 0px 0px 0px;
+    padding: 30px;
+    border-radius: 30px;
+    box-shadow: 2px 2px 4px 4px grey;
+}

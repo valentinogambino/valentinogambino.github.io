@@ -1,0 +1,42 @@
+#help-form {
+    text-align: center;
+}
+
+#form-label-1, #form-label-2, #form-label-3 {
+    display: flex;
+}
+
+#form-input-1, #form-input-2, #form-input-3 {
+    padding: 10px 10px 10px 10px;
+    height: 45px;
+    width: 300px;
+    font-size: 1em;
+    background-color: white;
+    color: black;
+    border-radius: 5px;
+}
+
+#form-input-3 {
+    height: 135px;
+}
+
+#button-1, #button-2 {
+    margin-top: 10px;
+    padding: 10px;
+    font-size: 1em;
+    font-weight: bold;
+    background-color: var(--color-theme);
+    color: white;
+    border: 0px;
+    border-radius: 10px;
+}
+
+#email-error {
+    display: none;
+    margin: 30px 350px 10px 350px;  
+    color: white;
+    text-align: center;
+    padding: 10px;
+    border-radius: 20px;
+    background-color: #dc3545;
+}
