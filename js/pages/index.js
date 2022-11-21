@@ -39,7 +39,7 @@ async function weather() {
     const select = document.getElementById("select-city");
     const selectedCity = select.options[select.selectedIndex].value;
 
-    const weather = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${selectedCity}&appid=52dce47a7821d13b1c4dfe1c0c73bcd7&units=metric&lang=es`)
+    const weather = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${selectedCity}&appid=52dce47a7821d13b1c4dfe1c0c73bcd7&units=metric&lang=es`)
                 .then(response => response.json())
                 .then(data => {
                     
