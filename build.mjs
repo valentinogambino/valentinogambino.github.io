@@ -1,4 +1,4 @@
-// Genera el CV: data/cv.json + src/ -> docs/ (4 HTML + 4 PDF).
+// Genera el CV en formato MIT (CAPD): data/cv.json + src/ -> docs/ (4 HTML + 4 PDF).
 //   node build.mjs           HTML + PDF
 //   node build.mjs --no-pdf  solo HTML (más rápido mientras se edita)
 import { readFileSync, writeFileSync, mkdirSync, copyFileSync, existsSync, rmSync } from 'node:fs';
@@ -10,7 +10,7 @@ import { checkSensible } from './scripts/check-sensible.mjs';
 const ROOT = dirname(fileURLToPath(import.meta.url));
 const OUT = join(ROOT, 'docs');
 const LANGS = ['es', 'en'];
-const LEVEL_ORDER = ['advanced', 'intermediate', 'basic', null];
+const LEVEL_ORDER = ['advanced', 'intermediate', 'basic'];
 const EDGE_PATHS = [
   'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe',
   'C:/Program Files/Microsoft/Edge/Application/msedge.exe',
@@ -22,100 +22,89 @@ const template = readFileSync(join(ROOT, 'src/template.html'), 'utf8');
 const esc = (s) => String(s)
   .replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;');
 const t = (v, lang) => (v && typeof v === 'object' ? v[lang] : v);
-const cap = (s) => s.charAt(0).toUpperCase() + s.slice(1);
 
-// Revisión semestral: ene–jun = 1, jul–dic = 2. Coincide con el tag de git.
 const now = new Date();
-const revision = `${now.getFullYear()}-${now.getMonth() < 6 ? 1 : 2}`;
 
-function updated(L) {
+function updated(lang, L) {
   const month = L.months[now.getMonth()];
-  return `${L.updated}: ${month} ${L === cv.labels.es ? 'de ' : ''}${now.getFullYear()}`;
+  return `${L.updated}: ${month} ${lang === 'es' ? 'de ' : ''}${now.getFullYear()}`;
 }
 
-function period(start, end, L) {
-  return `${start} – ${end ?? L.present}`;
-}
+const period = (start, end, L) => `${start} – ${end ?? L.present}`;
+const decimal = (n, lang) => n.toFixed(2).replace('.', lang === 'es' ? ',' : '.');
 
-function titleBlock(variant, lang, L) {
+function header(lang) {
   const c = cv.contact;
-  const fields = [
-    [L.email, `<a href="mailto:${esc(c.email)}">${esc(c.email)}</a>`],
-    [L.location, esc(t(c.location, lang))],
-  ];
+  const parts = [esc(t(c.location, lang)), `<a href="mailto:${esc(c.email)}">${esc(c.email)}</a>`];
   if (c.linkedin) {
     const shown = c.linkedin.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '');
-    fields.push([L.linkedin, `<a href="${esc(c.linkedin)}">${esc(shown)}</a>`]);
+    parts.push(`<a href="${esc(c.linkedin)}">${esc(shown)}</a>`);
   }
-  return `<header class="title-block">
-  <div class="tb-name">
-    <h1>${esc(cv.name)}</h1>
-    <p class="headline">${t(variant.headline, lang).split(' · ').map((r) => `<span>${esc(r)}</span>`).join(' · ')}</p>
-  </div>
-  <dl class="tb-fields">
-${fields.map(([k, v]) => `    <div><dt class="tb-label">${esc(k)}</dt><dd>${v}</dd></div>`).join('\n')}
-    <div class="tb-rev"><dt class="tb-label">${esc(L.revision)}</dt><dd>${revision}</dd></div>
-  </dl>
+  return `<header class="cv-head">
+  <h1>${esc(cv.name)}</h1>
+  <p class="contact">${parts.join('<span class="sep" aria-hidden="true"> • </span>')}</p>
 </header>`;
 }
 
-const sections = {
-  summary: (variant, lang) => `<p>${esc(t(variant.summary, lang))}</p>`,
+// Una entrada al estilo MIT: institución + lugar, título + fechas, y líneas de detalle.
+function entry({ org, place, title, when, lines }) {
+  return `  <article class="entry">
+    <p class="org">${esc(org)}</p>
+    <p class="place">${esc(place)}</p>
+    <p class="title">${esc(title)}</p>
+    <p class="when">${esc(when)}</p>
+${lines.filter(Boolean).map((l) => `    <p class="line">${l}</p>`).join('\n')}
+  </article>`;
+}
 
-  experience: (variant, lang, L) => {
+const sections = {
+  education: (variantKey, lang, L) => cv.variants[variantKey].educationOrder.map((key) => {
+    const e = cv.education[key];
+    const facts = [
+      e.progress && L.progress.replace('{approved}', e.progress.approved).replace('{total}', e.progress.total),
+      t(e.detail, lang),
+      e.gpa != null && L.gpa.replace('{gpa}', decimal(e.gpa, lang)),
+    ].filter(Boolean).map(esc).join(' ');
+    const courses = e.coursework?.[variantKey]?.[lang] ?? [];
+    return entry({
+      org: t(e.institution, lang),
+      place: t(e.location, lang),
+      title: t(e.degree, lang),
+      when: period(e.start, e.end, L),
+      lines: [
+        facts,
+        courses.length && `<span class="lead">${esc(L.coursework)}:</span> ${courses.map(esc).join(', ')}.`,
+      ],
+    });
+  }).join('\n'),
+
+  experience: (variantKey, lang, L) => {
     if (!cv.experience.length) return null;
-    return `<div class="entries">
-${cv.experience.map((x) => `  <article class="entry">
-    <h3>${esc(t(x.role, lang))}</h3>
-    <p class="when">${esc(period(x.start, x.end, L))}</p>
-    <p class="where">${esc(t(x.org, lang))}</p>
-${(t(x.bullets, lang) ?? []).map((b) => `    <p class="note">${esc(b)}</p>`).join('\n')}
-  </article>`).join('\n')}
-</div>`;
+    return cv.experience.map((x) => entry({
+      org: t(x.org, lang),
+      place: t(x.location, lang) ?? '',
+      title: t(x.role, lang),
+      when: period(x.start, x.end, L),
+      lines: (t(x.bullets, lang) ?? []).map((b) => `• ${esc(b)}`),
+    })).join('\n');
   },
 
-  education: (variant, lang, L) => `<div class="entries">
-${variant.educationOrder.map((key) => {
-    const e = cv.education[key];
-    const progress = e.progress
-      ? `\n    <p class="note">${esc(L.progress.replace('{approved}', e.progress.approved).replace('{total}', e.progress.total))}</p>`
-      : '';
-    return `  <article class="entry">
-    <h3>${esc(t(e.degree, lang))}</h3>
-    <p class="when">${esc(period(e.start, e.end, L))}</p>
-    <p class="where">${esc(t(e.institution, lang))}</p>${progress}
-  </article>`;
-  }).join('\n')}
-</div>`,
-
-  skills: (variant, lang, L) => `<dl class="skill-list">
-${variant.skillOrder.map((key) => {
-    const group = cv.skills[key];
-    const lines = LEVEL_ORDER.map((level) => {
-      const names = group.items.filter((i) => i.level === level).map((i) => esc(t(i.name, lang)));
-      if (!names.length) return '';
-      const label = level ? `<span class="lvl">${esc(cap(L.levels[level]))}:</span> ` : '';
-      return `      <p>${label}${names.join(', ')}</p>`;
-    }).filter(Boolean);
-    return `  <div class="skill-group">
-    <dt>${esc(t(group.label, lang))}</dt>
-    <dd>
-${lines.join('\n')}
-    </dd>
-  </div>`;
-  }).join('\n')}
-</dl>`,
-
-  languages: (variant, lang) => `<ul class="inline-list">
-${cv.languages.map((l) => `  <li>${esc(t(l.name, lang))} — ${esc(t(l.level, lang).toLowerCase())}</li>`).join('\n')}
-</ul>`,
-
-  interests: (variant, lang) => {
-    const items = cv.interests[lang];
-    if (!items?.length) return null;
-    return `<ul class="inline-list">
-${items.map((i) => `  <li>${esc(i)}</li>`).join('\n')}
-</ul>`;
+  // Una línea por categoría, con la redacción de los ejemplos de MIT ("proficient in…; familiar with…").
+  skills: (variantKey, lang, L) => {
+    const lines = cv.variants[variantKey].skillOrder.map((key) => {
+      const group = cv.skills[key];
+      const clauses = LEVEL_ORDER.map((level) => {
+        const names = group.items.filter((i) => i.level === level).map((i) => esc(t(i.name, lang)));
+        return names.length ? `${L.levels[level]} ${names.join(', ')}` : '';
+      }).filter(Boolean);
+      clauses.push(...group.items.filter((i) => !i.level).map((i) => esc(t(i.name, lang))));
+      return `<span class="lead">${esc(t(group.label, lang))}:</span> ${clauses.join('; ')}.`;
+    });
+    lines.push(`<span class="lead">${esc(L.languages)}:</span> ${esc(t(cv.languages, lang))}.`);
+    lines.push(`<span class="lead">${esc(L.interests)}:</span> ${esc(t(cv.interests, lang))}.`);
+    return `<div class="skill-lines">
+${lines.map((l) => `  <p>${l}</p>`).join('\n')}
+</div>`;
   },
 };
 
@@ -129,25 +118,24 @@ function render(variantKey, lang) {
   const otherPath = variant.path + (other === 'en' ? 'en/' : '');
 
   const body = [
-    titleBlock(variant, lang, L),
+    header(lang),
     ...variant.sections.map((name) => {
-      const html = sections[name](variant, lang, L);
-      return html && `<section class="${name}" aria-labelledby="h-${name}">
+      const html = sections[name](variantKey, lang, L);
+      return html && `<section class="cv-section ${name}" aria-labelledby="h-${name}">
 <h2 id="h-${name}">${esc(L[name])}</h2>
+<div class="cv-body">
 ${html}
+</div>
 </section>`;
     }).filter(Boolean),
-    `<footer class="sheet-foot">
-  <span>${esc(L.revision)} ${revision} · ${esc(updated(L))}</span>
-  <span>${esc(cv.siteUrl.replace(/^https?:\/\//, '').replace(/\/$/, ''))}</span>
-</footer>`,
+    `<footer class="cv-foot">${esc(updated(lang, L))}</footer>`,
   ].join('\n');
 
   const vars = {
     lang,
     otherLang: other,
     title: `CV — ${cv.name}${L.titleSuffix[variantKey]}`,
-    description: t(variant.summary, lang),
+    description: `CV — ${cv.name}`,
     canonical: cv.siteUrl + path,
     otherCanonical: cv.siteUrl + otherPath,
     root,
@@ -199,7 +187,7 @@ const outputs = [];
 for (const variantKey of Object.keys(cv.variants)) {
   for (const lang of LANGS) outputs.push(render(variantKey, lang));
 }
-console.log(`HTML: ${outputs.length} páginas (rev. ${revision})`);
+console.log(`HTML: ${outputs.length} páginas`);
 
 // La guardia corre sobre los HTML antes de imprimir: los PDF salen de esos mismos
 // HTML (y comprimidos no se pueden revisar con regex). Si falla, docs/ se borra

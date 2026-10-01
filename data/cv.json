@@ -11,31 +11,15 @@
     "ing": {
       "path": "",
       "pdf": "cv-valentino-gambino",
-      "headline": {
-        "es": "Técnico Mecánico · Estudiante de Ingeniería Industrial",
-        "en": "Mechanical Technician · Industrial Engineering Student"
-      },
-      "summary": {
-        "es": "Técnico Mecánico (IPS-UNR) y estudiante de Ingeniería Industrial en la UCA y de la Tecnicatura Universitaria en Programación en la UTN. Formación práctica en diseño CAD/CAM, mecanizado y fabricación, complementada con programación y manejo de datos. Me interesan el diseño de ingeniería, las operaciones, el planeamiento y la investigación y desarrollo.",
-        "en": "Mechanical Technician (IPS-UNR), currently studying Industrial Engineering at UCA and a University Technical Degree in Programming at UTN. Hands-on background in CAD/CAM design, machining and manufacturing, complemented by programming and data skills. Interested in engineering design, operations, planning and R&D."
-      },
-      "sections": ["summary", "experience", "education", "skills", "languages", "interests"],
-      "educationOrder": ["uca", "tup", "ips"],
+      "sections": ["education", "experience", "skills"],
+      "educationOrder": ["uca", "tup", "utnMec", "ips"],
       "skillOrder": ["cad", "manufacturing", "programming", "data", "office"]
     },
     "dev": {
       "path": "dev/",
       "pdf": "cv-valentino-gambino-dev",
-      "headline": {
-        "es": "Estudiante de Programación · Técnico Mecánico",
-        "en": "Programming Student · Mechanical Technician"
-      },
-      "summary": {
-        "es": "Estudiante de la Tecnicatura Universitaria en Programación (UTN) y de Ingeniería Industrial (UCA), con título de Técnico Mecánico. Programo en Python y JavaScript, trabajo con bases de datos SQL y uso Linux, Docker y Git en el día a día. Sumo al desarrollo de software una base de ingeniería en procesos, calidad y fabricación.",
-        "en": "Student of the University Technical Degree in Programming (UTN) and Industrial Engineering (UCA), with a Mechanical Technician degree. I program in Python and JavaScript, work with SQL databases and use Linux, Docker and Git daily. I bring an engineering background in processes, quality and manufacturing to software development."
-      },
-      "sections": ["summary", "experience", "skills", "education", "languages", "interests"],
-      "educationOrder": ["tup", "uca", "ips"],
+      "sections": ["education", "experience", "skills"],
+      "educationOrder": ["uca", "tup", "utnMec", "ips"],
       "skillOrder": ["programming", "data", "office", "cad", "manufacturing"]
     }
   },
@@ -44,31 +28,66 @@
 
   "education": {
     "uca": {
+      "institution": { "es": "Pontificia Universidad Católica Argentina (UCA)", "en": "Pontifical Catholic University of Argentina (UCA)" },
+      "location": { "es": "Rosario, Argentina", "en": "Rosario, Argentina" },
       "degree": { "es": "Ingeniería Industrial", "en": "Industrial Engineering" },
-      "institution": { "es": "Pontificia Universidad Católica Argentina (UCA), Rosario", "en": "Pontifical Catholic University of Argentina (UCA), Rosario" },
-      "start": "2024",
+      "start": "2026",
       "end": null,
-      "progress": { "approved": 21, "total": 63 }
+      "progress": { "approved": 10, "total": 63 },
+      "gpa": null,
+      "detail": null,
+      "coursework": {
+        "ing": { "es": ["Probabilidad y Estadística", "Física I", "Álgebra y Geometría"], "en": ["Probability and Statistics", "Physics I", "Algebra and Geometry"] },
+        "dev": { "es": ["Probabilidad y Estadística"], "en": ["Probability and Statistics"] }
+      }
     },
     "tup": {
+      "institution": { "es": "Universidad Tecnológica Nacional (UTN)", "en": "National Technological University (UTN)" },
+      "location": { "es": "Rosario, Argentina", "en": "Rosario, Argentina" },
       "degree": { "es": "Tecnicatura Universitaria en Programación (plan 2024)", "en": "University Technical Degree in Programming (2024 curriculum)" },
-      "institution": { "es": "Universidad Tecnológica Nacional (UTN), Facultad Regional Rosario", "en": "National Technological University (UTN), Rosario" },
       "start": "2024",
       "end": null,
-      "progress": { "approved": 8, "total": 18 }
+      "progress": { "approved": 8, "total": 18 },
+      "gpa": 7.13,
+      "detail": null,
+      "coursework": {
+        "ing": { "es": ["Programación I y II", "Probabilidad y Estadística"], "en": ["Programming I and II", "Probability and Statistics"] },
+        "dev": { "es": ["Programación I y II", "Arquitectura y Sistemas Operativos", "Probabilidad y Estadística"], "en": ["Programming I and II", "Computer Architecture and Operating Systems", "Probability and Statistics"] }
+      }
+    },
+    "utnMec": {
+      "institution": { "es": "Universidad Tecnológica Nacional (UTN)", "en": "National Technological University (UTN)" },
+      "location": { "es": "Rosario, Argentina", "en": "Rosario, Argentina" },
+      "degree": { "es": "Ingeniería Mecánica (estudios previos)", "en": "Mechanical Engineering (previous studies)" },
+      "start": "2024",
+      "end": "2025",
+      "progress": null,
+      "gpa": 7.86,
+      "detail": { "es": "7 materias aprobadas, acreditadas por equivalencia en Ingeniería Industrial.", "en": "7 courses passed, credited toward Industrial Engineering." },
+      "coursework": {
+        "ing": { "es": ["Ingeniería Mecánica I", "Física I", "Análisis Matemático I"], "en": ["Mechanical Engineering I", "Physics I", "Calculus I"] },
+        "dev": { "es": [], "en": [] }
+      }
     },
     "ips": {
-      "degree": { "es": "Técnico Mecánico", "en": "Mechanical Technician" },
       "institution": { "es": "Instituto Politécnico Superior \"General San Martín\" (UNR)", "en": "Instituto Politécnico Superior \"General San Martín\" (National University of Rosario)" },
+      "location": { "es": "Rosario, Argentina", "en": "Rosario, Argentina" },
+      "degree": { "es": "Técnico Mecánico", "en": "Mechanical Technician" },
       "start": "2015",
       "end": "2021",
-      "progress": null
+      "progress": null,
+      "gpa": 7.52,
+      "detail": null,
+      "coursework": {
+        "ing": { "es": ["Elementos de Máquinas", "Máquinas Hidráulicas", "Procesos de Mecanizado", "Sólidos Paramétricos"], "en": ["Machine Elements", "Hydraulic Machines", "Machining Processes", "Parametric Solid Modeling"] },
+        "dev": { "es": ["Sólidos Paramétricos"], "en": ["Parametric Solid Modeling"] }
+      }
     }
   },
 
   "skills": {
     "cad": {
-      "label": { "es": "Diseño CAD/CAM", "en": "CAD/CAM design" },
+      "label": { "es": "CAD/CAM", "en": "CAD/CAM" },
       "items": [
         { "name": "SolidWorks 3D", "level": "intermediate" },
         { "name": "SolidWorks CAM", "level": "intermediate" },
@@ -103,7 +122,7 @@
         { "name": "Docker", "level": "basic" },
         { "name": "WSL", "level": "basic" },
         { "name": "Arduino", "level": "basic" },
-        { "name": { "es": "Desarrollo asistido por IA (Claude Code)", "en": "AI-assisted development (Claude Code)" }, "level": null }
+        { "name": { "es": "desarrollo asistido por IA (Claude Code)", "en": "AI-assisted development (Claude Code)" }, "level": null }
       ]
     },
     "data": {
@@ -115,67 +134,60 @@
       ]
     },
     "office": {
-      "label": { "es": "Gestión y ofimática", "en": "Management and office tools" },
+      "label": { "es": "Ofimática y gestión", "en": "Office and management" },
       "items": [
         { "name": "Office / Google Workspace", "level": "advanced" },
         { "name": "Excel", "level": "intermediate" },
-        { "name": { "es": "Modelado de procesos BPM (draw.io)", "en": "BPM process modeling (draw.io)" }, "level": "basic" }
+        { "name": { "es": "modelado de procesos BPM (draw.io)", "en": "BPM process modeling (draw.io)" }, "level": "basic" }
       ]
     }
   },
 
-  "languages": [
-    { "name": { "es": "Inglés", "en": "English" }, "level": { "es": "Avanzado", "en": "Advanced" } },
-    { "name": { "es": "Italiano", "en": "Italian" }, "level": { "es": "Elemental", "en": "Elementary" } },
-    { "name": { "es": "Portugués", "en": "Portuguese" }, "level": { "es": "Elemental", "en": "Elementary" } }
-  ],
+  "languages": {
+    "es": "español (nativo); inglés (B2, Cambridge First Certificate, 2024); italiano (básico); portugués (básico)",
+    "en": "Spanish (native); English (B2, Cambridge First Certificate, 2024); Italian (basic); Portuguese (basic)"
+  },
 
   "interests": {
-    "es": ["Diseño de ingeniería", "Investigación y desarrollo", "Operaciones", "Planeamiento", "Sistemas"],
-    "en": ["Engineering design", "Research and development", "Operations", "Planning", "Systems"]
+    "es": "diseño de ingeniería, investigación y desarrollo, operaciones, planeamiento, sistemas",
+    "en": "engineering design, research and development, operations, planning, systems"
   },
 
   "labels": {
     "es": {
-      "summary": "Perfil",
-      "experience": "Experiencia",
       "education": "Formación",
-      "skills": "Herramientas y tecnologías",
+      "experience": "Experiencia",
+      "skills": "Habilidades e intereses",
       "languages": "Idiomas",
-      "interests": "Áreas de interés",
+      "interests": "Intereses",
       "present": "actualidad",
-      "progress": "{approved} de {total} materias aprobadas",
-      "levels": { "basic": "básico", "intermediate": "intermedio", "advanced": "avanzado" },
+      "progress": "{approved} de {total} materias aprobadas.",
+      "gpa": "Promedio: {gpa}/10.",
+      "coursework": "Materias relevantes",
+      "levels": { "advanced": "dominio de", "intermediate": "manejo intermedio de", "basic": "conocimientos básicos de" },
       "downloadPdf": "Descargar PDF",
       "otherLang": "English",
       "controls": "Idioma y descarga",
-      "email": "Email",
-      "location": "Ubicación",
-      "linkedin": "LinkedIn",
-      "revision": "Rev.",
-      "titleSuffix": { "ing": "", "dev": " (Desarrollo)" },
       "updated": "Actualizado",
+      "titleSuffix": { "ing": "", "dev": " (Desarrollo)" },
       "months": ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"]
     },
     "en": {
-      "summary": "Profile",
-      "experience": "Experience",
       "education": "Education",
-      "skills": "Tools and technologies",
+      "experience": "Experience",
+      "skills": "Skills & Interests",
       "languages": "Languages",
-      "interests": "Areas of interest",
+      "interests": "Interests",
       "present": "present",
-      "progress": "{approved} of {total} courses passed",
-      "levels": { "basic": "basic", "intermediate": "intermediate", "advanced": "advanced" },
+      "progress": "{approved} of {total} courses passed.",
+      "gpa": "GPA: {gpa}/10.",
+      "coursework": "Relevant coursework",
+      "levels": { "advanced": "advanced proficiency in", "intermediate": "proficient in", "basic": "familiar with" },
       "downloadPdf": "Download PDF",
       "otherLang": "Español",
       "controls": "Language and download",
-      "email": "Email",
-      "location": "Location",
-      "linkedin": "LinkedIn",
-      "revision": "Rev.",
-      "titleSuffix": { "ing": "", "dev": " (Software)" },
       "updated": "Updated",
+      "titleSuffix": { "ing": "", "dev": " (Software)" },
       "months": ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
     }
   }

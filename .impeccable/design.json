@@ -1,24 +1,20 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-01T15:00:00-03:00",
+  "generatedAt": "2026-10-01T16:30:00-03:00",
   "title": "Design System: CV Valentino Gambino",
   "extensions": {
     "colorMeta": {
-      "teal-ink": { "role": "primary", "displayName": "Tinta teal", "canonical": "oklch(45% 0.085 200)", "tonalRamp": ["oklch(15% 0.085 200)", "oklch(25% 0.085 200)", "oklch(35% 0.085 200)", "oklch(45% 0.085 200)", "oklch(55% 0.085 200)", "oklch(68% 0.07 200)", "oklch(82% 0.045 200)", "oklch(94% 0.025 200)"] },
-      "teal-wash": { "role": "primary", "displayName": "Lavado teal", "canonical": "oklch(94% 0.025 200)" },
-      "graphite": { "role": "neutral", "displayName": "Grafito", "canonical": "oklch(23% 0.012 240)", "tonalRamp": ["oklch(15% 0.012 240)", "oklch(23% 0.012 240)", "oklch(33% 0.012 240)", "oklch(43% 0.014 240)", "oklch(58% 0.012 240)", "oklch(72% 0.01 240)", "oklch(84% 0.01 230)", "oklch(95.5% 0.006 230)"] },
-      "graphite-soft": { "role": "neutral", "displayName": "Grafito suave", "canonical": "oklch(43% 0.014 240)" },
-      "frame-line": { "role": "neutral", "displayName": "Línea de marco", "canonical": "oklch(30% 0.012 240)" },
-      "hairline": { "role": "neutral", "displayName": "Línea fina", "canonical": "oklch(84% 0.01 230)" },
-      "sheet": { "role": "neutral", "displayName": "Hoja", "canonical": "oklch(100% 0 0)" },
-      "desk": { "role": "neutral", "displayName": "Mesa", "canonical": "oklch(95.5% 0.006 230)" }
+      "ink": { "role": "neutral", "displayName": "Tinta", "canonical": "#111111", "tonalRamp": ["#111111", "#2a2a2a", "#444444", "#5e5e5e", "#7a7a7a", "#9a9a9a", "#c4c4c4", "#e4e4e4"] },
+      "ink-soft": { "role": "neutral", "displayName": "Tinta suave", "canonical": "#444444" },
+      "rule": { "role": "neutral", "displayName": "Regla", "canonical": "#111111" },
+      "paper": { "role": "neutral", "displayName": "Papel", "canonical": "#ffffff" },
+      "selection": { "role": "neutral", "displayName": "Selección", "canonical": "#e4e4e4" }
     },
     "typographyMeta": {
-      "display": { "displayName": "Nombre", "purpose": "Solo el nombre en el rótulo." },
-      "headline": { "displayName": "Título de sección", "purpose": "Mayúsculas teal seguidas de línea fina." },
-      "title": { "displayName": "Entrada", "purpose": "Carrera o puesto." },
-      "body": { "displayName": "Texto", "purpose": "Cuerpo con numerales tabulares." },
-      "label": { "displayName": "Etiqueta de campo", "purpose": "Solo campos del rótulo." }
+      "display": { "displayName": "Nombre", "purpose": "Solo el nombre, centrado en versalitas." },
+      "headline": { "displayName": "Etiqueta de sección", "purpose": "Columna izquierda (arriba en móvil)." },
+      "body": { "displayName": "Texto", "purpose": "Todo el contenido; 11pt en el PDF." },
+      "label": { "displayName": "Contacto", "purpose": "Línea de contacto centrada." }
     },
     "shadows": [],
     "motion": [],
@@ -26,40 +22,40 @@
   },
   "components": [
     {
-      "name": "Rótulo",
+      "name": "Encabezado",
       "kind": "custom",
-      "refersTo": "title-block-cell",
-      "description": "Encabezado tipo title block de plano: nombre, campos etiquetados y revisión.",
-      "html": "<header class=\"ds-tb\"><div class=\"ds-tb-name\"><h1>Valentino Gambino</h1><p>Técnico Mecánico · Estudiante de Ingeniería Industrial</p></div><dl class=\"ds-tb-fields\"><div><dt>Email</dt><dd><a href=\"#\">gambinovt@gmail.com</a></dd></div><div><dt>Ubicación</dt><dd>Rosario, Santa Fe, Argentina</dd></div><div class=\"ds-tb-rev\"><dt>Rev.</dt><dd>2026-2</dd></div></dl></header>",
-      "css": ".ds-tb{display:grid;grid-template-columns:1.7fr 1fr;border:1px solid oklch(30% 0.012 240);font-family:Barlow,system-ui,sans-serif;color:oklch(23% 0.012 240);background:#fff}.ds-tb-name{padding:1rem 1.25rem;border-right:1px solid oklch(30% 0.012 240);display:flex;flex-direction:column;justify-content:flex-end;gap:.375rem}.ds-tb-name h1{margin:0;font-family:'Barlow Semi Condensed',Barlow,sans-serif;font-weight:700;font-size:2.5rem;line-height:1;letter-spacing:-.015em}.ds-tb-name p{margin:0;color:oklch(43% 0.014 240);font-size:1.125rem}.ds-tb-fields{margin:0;display:grid}.ds-tb-fields>div{padding:.5rem .875rem;border-bottom:1px solid oklch(84% 0.01 230)}.ds-tb-fields>div:last-child{border-bottom:0}.ds-tb-fields dt{font-family:'Barlow Semi Condensed',sans-serif;font-weight:600;font-size:.6875rem;letter-spacing:.08em;text-transform:uppercase;color:oklch(43% 0.014 240)}.ds-tb-fields dd{margin:0}.ds-tb-fields a{color:oklch(45% 0.085 200);text-underline-offset:.2em}.ds-tb-rev{display:flex;justify-content:space-between;align-items:baseline;background:oklch(94% 0.025 200)}.ds-tb-rev dd{font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;color:oklch(45% 0.085 200)}"
+      "refersTo": "display",
+      "description": "Nombre centrado en versalitas, línea de contacto y regla negra.",
+      "html": "<header class=\"ds-head\"><h1>Valentino Gambino</h1><p>Rosario, Santa Fe, Argentina • <a href=\"#\">gambinovt@gmail.com</a></p></header>",
+      "css": ".ds-head{text-align:center;padding-bottom:.55rem;border-bottom:1px solid #111;font-family:Tinos,'Times New Roman',serif;color:#111}.ds-head h1{margin:0;font-size:1.7rem;font-weight:700;font-variant:small-caps;letter-spacing:.02em;line-height:1.1}.ds-head p{margin:.3rem 0 0;font-size:.9375rem}.ds-head a{color:inherit;text-underline-offset:.18em}.ds-head a:hover{text-decoration-thickness:2px}.ds-head a:focus-visible{outline:2px solid #111;outline-offset:2px}"
     },
     {
-      "name": "Título de sección",
+      "name": "Sección con entrada",
       "kind": "custom",
       "refersTo": "headline",
-      "description": "Título en mayúsculas teal con línea fina hasta el borde.",
-      "html": "<h2 class=\"ds-h2\">Formación</h2>",
-      "css": ".ds-h2{display:flex;align-items:center;gap:.75rem;font-family:'Barlow Semi Condensed',sans-serif;font-weight:600;font-size:.9375rem;letter-spacing:.09em;text-transform:uppercase;color:oklch(45% 0.085 200)}.ds-h2::after{content:'';flex:1;height:1px;background:oklch(84% 0.01 230)}"
+      "description": "Etiqueta a la izquierda; institución|lugar, título|fechas y detalle.",
+      "html": "<section class=\"ds-sec\"><h2>Formación</h2><div><article class=\"ds-entry\"><p class=\"o\">Pontificia Universidad Católica Argentina (UCA)</p><p class=\"r\">Rosario, Argentina</p><p class=\"t\">Ingeniería Industrial</p><p class=\"r\">2026 – actualidad</p><p class=\"l\">10 de 63 materias aprobadas.</p><p class=\"l\"><b>Materias relevantes:</b> Probabilidad y Estadística.</p></article></div></section>",
+      "css": ".ds-sec{display:grid;grid-template-columns:7.25rem 1fr;column-gap:1.25rem;font-family:Tinos,'Times New Roman',serif;color:#111;line-height:1.38}.ds-sec h2{margin:0;font-size:1rem;font-weight:700}.ds-entry{display:grid;grid-template-columns:1fr auto;column-gap:1rem}.ds-entry p{margin:0}.ds-entry .o{font-weight:700}.ds-entry .t{font-style:italic}.ds-entry .r{text-align:right;white-space:nowrap}.ds-entry .l{grid-column:1/-1}"
     },
     {
-      "name": "Link",
+      "name": "Línea de habilidades",
       "kind": "custom",
-      "refersTo": "text-link",
-      "description": "Link de texto teal; los controles de idioma y PDF usan la misma tinta.",
-      "html": "<a class=\"ds-link\" href=\"#\">Descargar PDF</a>",
-      "css": ".ds-link{color:oklch(45% 0.085 200);font-family:'Barlow Semi Condensed',sans-serif;font-weight:600;font-size:.8125rem;letter-spacing:.04em;text-transform:uppercase;text-decoration-thickness:1px;text-underline-offset:.2em}.ds-link:hover{text-decoration-thickness:2px}.ds-link:focus-visible{outline:2px solid oklch(45% 0.085 200);outline-offset:3px}"
+      "refersTo": "body",
+      "description": "Una línea por categoría, con sangría francesa y redacción MIT.",
+      "html": "<p class=\"ds-skill\"><b>Programación:</b> manejo intermedio de Python, JavaScript; conocimientos básicos de C/C++, Docker.</p>",
+      "css": ".ds-skill{margin:0;padding-left:1em;text-indent:-1em;font-family:Tinos,'Times New Roman',serif;color:#111;line-height:1.38}"
     }
   ],
   "narrative": {
-    "northStar": "La hoja de plano",
-    "overview": "El CV se lee como una lámina de dibujo técnico: marco de línea fina doble y un rótulo con nombre, contacto y número de revisión. Densidad sobria, jerarquía por peso tipográfico, líneas y una sola tinta. Todo es texto real en una columna.",
-    "keyCharacteristics": ["Rótulo enmarcado con celdas etiquetadas; la celda de revisión va lavada en teal.", "Una columna, sin íconos ni barras; niveles en palabras.", "Barlow Semi Condensed + Barlow, numerales tabulares.", "Esquinas rectas en todo.", "Impresión A4 en una página."],
+    "northStar": "El CV de MIT",
+    "overview": "El CV sigue el formato que recomienda MIT CAPD y sus CV de ejemplo: serif conservadora entre 10 y 12pt, márgenes uniformes, una página, negrita solo en datos clave, títulos de sección en una columna angosta a la izquierda, institución y lugar en una línea, título y fechas en la siguiente. No hay color ni ornamentos: la autoridad sale de lo convencional.",
+    "keyCharacteristics": ["Nombre centrado en versalitas, línea de contacto centrada y una regla negra debajo.", "Etiquetas de sección a la izquierda, contenido a la derecha; en móvil la etiqueta pasa arriba.", "Institución en negrita y título en cursiva; lugar y fechas alineados a la derecha.", "Habilidades en una línea por categoría, con niveles escritos al estilo MIT.", "La impresión A4 es la misma página, en 11pt y con márgenes de 19mm."],
     "rules": [
-      { "name": "The One Ink Rule", "body": "El teal solo marca la estructura (títulos, revisión, links). Nunca va en bloques de texto ni en fondos grandes.", "section": "colors" },
-      { "name": "The Label Is A Field Rule", "body": "Las etiquetas en mayúsculas pequeñas solo nombran campos del rótulo. Nunca van como eyebrow arriba de un título.", "section": "typography" },
-      { "name": "The One Sheet Rule", "body": "Si un cambio de contenido manda el PDF a una segunda página, se ajusta primero el espaciado de impresión, no el texto.", "section": "elevation" }
+      { "name": "The No Color Rule", "body": "MIT recomienda un CV conservador: nada de color, ni siquiera en los links, que van en tinta y subrayados.", "section": "colors" },
+      { "name": "The Bold Sparingly Rule", "body": "La negrita queda reservada para el nombre, las etiquetas de sección, las instituciones y los rótulos de línea.", "section": "typography" },
+      { "name": "The One Page Rule", "body": "Los 4 PDF tienen que entrar en una página A4. El tamaño de letra nunca baja de 10pt.", "section": "elevation" }
     ],
-    "dos": ["Do escribir los niveles en palabras (\"Intermedio: …\"), agrupando los ítems del mismo nivel.", "Do mantener el número de revisión en el rótulo y en el pie.", "Do verificar que cada PDF tenga 1 página y que las páginas no tengan scroll horizontal a 402px después de cada cambio."],
-    "donts": ["Don't usar íconos, barras o anillos de nivel, ni una barra lateral (elección explícita del dueño por ATS).", "Don't redondear esquinas ni agregar sombras.", "Don't poner etiquetas tipo eyebrow arriba de los títulos de sección."]
+    "dos": ["Do mantener una serif conservadora entre 10 y 12pt en el PDF (11pt hoy).", "Do listar la formación en orden cronológico inverso, con una línea de \"Materias relevantes\" por carrera.", "Do escribir los niveles con la redacción MIT: \"manejo intermedio de…; conocimientos básicos de…\" / \"proficient in…; familiar with…\"."],
+    "donts": ["Don't agregar color, íconos, barras de nivel, foto ni una barra lateral.", "Don't incluir datos personales (edad, documento, estado civil) ni \"referencias a pedido\". Es regla de MIT y de este proyecto.", "Don't usar negrita fuera de los casos de la regla de arriba."]
   }
 }
