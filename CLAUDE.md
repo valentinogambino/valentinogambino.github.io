@@ -103,6 +103,8 @@ Sin `npm install`: Node 24 con módulos nativos. La prueba ATS usa `pdftotext`
     como experiencia.
   - Inglés: B2 según el FCE (dic. 2024). Italiano y portugués: básico.
     Español: nativo.
+- Habilidades: solo las que el usuario puede defender en una entrevista
+  técnica (revisadas el 2026-10-01). Al sumar una, preguntarlo.
 - Ningún dato se inventa: todo sale de `fuentes/` o de una confirmación
   explícita del usuario.
 
@@ -122,8 +124,6 @@ Sin `npm install`: Node 24 con módulos nativos. La prueba ATS usa `pdftotext`
   resume sale sin esa sección. Cuando aparezca uno: datos del usuario,
   verbos de acción y PAR, y `only` si va en un solo resume. El generador de
   este repo no se carga como proyecto (decisión del usuario).
-- Habilidades: con los proyectos cargados, sacar de Programación lo que no
-  respalde ningún proyecto ni se pueda defender en una entrevista técnica.
 - Teléfono: decidir si se genera un PDF privado con teléfono, fuera de
   `docs/` y `local/` (implica cambiar la regla de datos sensibles y la
   guardia).
