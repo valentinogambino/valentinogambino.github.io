@@ -197,7 +197,7 @@ Se usan cuando se incorporen; ver Pendientes en `CLAUDE.md`.
 - **Contacto:** sin teléfono ni dirección, aunque el Checklist pide teléfono:
   la web es pública y la política de datos de `CLAUDE.md` tiene prioridad.
 - **Fechas:** en los estudios en curso va el egreso previsto ("Egreso
-  previsto: 2029" / "Expected 2029"), por ahora sin mes.
+  previsto: 2030" / "Expected 2030"), por ahora sin mes.
 - **Sin JS** en las páginas; la web muestra el mismo documento que el PDF.
 - **Avance de carrera ("9 de 62 materias"):** solo en el CV académico. En los
   resumes no va: pone el foco en lo que falta, y MIT pide la fecha de egreso
