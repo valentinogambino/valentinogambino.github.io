@@ -1,6 +1,7 @@
 {
   "name": "Valentino Tomas Gambino",
-  "siteUrl": "https://valentinogambino.github.io/cv/",
+  "siteUrl": "https://valentinogambino.github.io/",
+  "home": "resume/",
   "contact": {
     "email": "gambinovt@gmail.com",
     "linkedin": "",
@@ -10,7 +11,7 @@
   "documents": {
     "ing": {
       "kind": "resume",
-      "path": "",
+      "path": "resume/",
       "publish": true,
       "index": true,
       "file": { "es": "cv-valentino-gambino", "en": "resume-valentino-gambino" },
@@ -23,7 +24,7 @@
     },
     "dev": {
       "kind": "resume",
-      "path": "dev/",
+      "path": "resume/dev/",
       "publish": true,
       "index": false,
       "file": { "es": "cv-valentino-gambino-dev", "en": "resume-valentino-gambino-dev" },
@@ -36,7 +37,7 @@
     },
     "cv": {
       "kind": "cv",
-      "path": "academico/",
+      "path": "cv/",
       "publish": false,
       "index": false,
       "file": { "es": "cv-academico-valentino-gambino", "en": "cv-valentino-gambino-academic" },
@@ -58,6 +59,7 @@
       "degree": { "es": "Ingeniería Industrial", "en": "Industrial Engineering" },
       "start": "2026",
       "end": null,
+      "expected": "2029",
       "progress": { "approved": 9, "total": 62 },
       "gpa": null,
       "detail": null,
@@ -72,6 +74,7 @@
       "degree": { "es": "Tecnicatura Universitaria en Programación (plan 2024)", "en": "University Technical Degree in Programming (2024 curriculum)" },
       "start": "2024",
       "end": null,
+      "expected": "2027",
       "progress": { "approved": 8, "total": 18 },
       "gpa": 7.13,
       "detail": null,
@@ -184,6 +187,7 @@
       },
       "variant": { "ing": "", "dev": " (Desarrollo)", "cv": "" },
       "present": "actualidad",
+      "expected": "Egreso previsto: {year}",
       "progress": "{approved} de {total} materias aprobadas",
       "gpa": "Promedio: {gpa}/10",
       "coursework": "Materias relevantes",
@@ -216,6 +220,7 @@
       },
       "variant": { "ing": "", "dev": " (Software)", "cv": "" },
       "present": "present",
+      "expected": "Expected {year}",
       "progress": "{approved} of {total} courses passed",
       "gpa": "GPA: {gpa}/10",
       "coursework": "Relevant coursework",

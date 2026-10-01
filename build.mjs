@@ -31,6 +31,8 @@ const t = (v, lang) => (v && typeof v === 'object' ? v[lang] : v);
 const now = new Date();
 
 const period = (start, end, L) => `${start} – ${end ?? L.present}`;
+// MIT pide la fecha de egreso (o de egreso previsto) en vez del período.
+const studyDates = (e, L) => (e.expected ? L.expected.replace('{year}', e.expected) : period(e.start, e.end, L));
 const decimal = (n, lang) => n.toFixed(2).replace('.', lang === 'es' ? ',' : '.');
 const sentence = (s) => (/[.!?]$/.test(s) ? s : `${s}.`);
 
@@ -88,7 +90,7 @@ const sections = {
       org: t(e.institution, lang),
       place: t(e.location, lang),
       title: t(e.degree, lang),
-      when: period(e.start, e.end, L),
+      when: studyDates(e, L),
       lines: [
         facts,
         courses.length && `<b>${esc(label)}:</b> ${courses.map(esc).join(', ')}`,
@@ -137,7 +139,9 @@ function render(key, lang) {
   const outRoot = doc.publish ? OUT.publish : OUT.local;
   const path = doc.path + (lang === 'en' ? 'en/' : '');
   const root = '../'.repeat(path.split('/').filter(Boolean).length);
+  // Los PDF viven en la carpeta del documento, junto a la página en español.
   const file = (paper) => `${doc.file[lang]}-${paper}.pdf`;
+  const pdfHref = (paper) => `${lang === 'en' ? '../' : ''}${file(paper)}`;
 
   const body = [
     header(lang),
@@ -171,8 +175,8 @@ ${html}
 
   const controls = [
     `<a href="${lang === 'es' ? 'en/' : '../'}" hreflang="${other}" lang="${other}">${esc(L.otherLang)}</a>`,
-    `<a href="${root}${file('a4')}" download>${esc(L.pdfA4)}</a>`,
-    `<a href="${root}${file('letter')}" download>${esc(L.pdfLetter)}</a>`,
+    `<a href="${pdfHref('a4')}" download>${esc(L.pdfA4)}</a>`,
+    `<a href="${pdfHref('letter')}" download>${esc(L.pdfLetter)}</a>`,
   ].join('\n');
 
   const vars = {
@@ -194,7 +198,7 @@ ${html}
   return {
     key, lang, kind: doc.kind, html: out,
     text: documentText(body),
-    pdfs: Object.keys(PAPERS).map((paper) => ({ paper, file: join(outRoot, file(paper)) })),
+    pdfs: Object.keys(PAPERS).map((paper) => ({ paper, file: join(outRoot, doc.path, file(paper)) })),
   };
 }
 
@@ -236,6 +240,19 @@ for (const dir of Object.values(OUT)) {
   copyFileSync(join(ROOT, 'src/styles.css'), join(dir, 'styles.css'));
 }
 writeFileSync(join(OUT.publish, '.nojekyll'), '');
+// La raíz del sitio queda para el portfolio; mientras tanto redirige al resume.
+writeFileSync(join(OUT.publish, 'index.html'), `<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>${esc(cv.name)}</title>
+<meta name="robots" content="noindex">
+<meta http-equiv="refresh" content="0; url=${esc(cv.home)}">
+<link rel="canonical" href="${esc(cv.siteUrl + cv.home)}">
+</head>
+<body><p><a href="${esc(cv.home)}">${esc(cv.name)}</a></p></body>
+</html>
+`);
 
 const pages = [];
 for (const key of Object.keys(cv.documents)) {

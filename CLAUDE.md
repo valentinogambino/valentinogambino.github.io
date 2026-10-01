@@ -11,12 +11,14 @@ resuelve de memoria.
 
 | Documento | Para qué | Dónde | PDF |
 |---|---|---|---|
-| Resume Ingeniería (principal) | industria | `/cv/` · `/cv/en/` | `cv-valentino-gambino-{a4,letter}.pdf` · `resume-valentino-gambino-{a4,letter}.pdf` |
-| Resume Desarrollo | software; se comparte por link, `noindex` | `/cv/dev/` · `/cv/dev/en/` | ídem con `-dev` |
-| CV académico (maestro) | ayudantía, beca, intercambio, posgrado | solo local: `local/academico/` | `cv-academico-…`, `cv-…-academic-…` |
+| Resume Ingeniería (principal) | industria | `/resume/` · `/resume/en/` | `cv-valentino-gambino-{a4,letter}.pdf` · `resume-valentino-gambino-{a4,letter}.pdf` |
+| Resume Desarrollo | software; se comparte por link, `noindex` | `/resume/dev/` · `/resume/dev/en/` | ídem con `-dev` |
+| CV académico (maestro) | ayudantía, beca, intercambio, posgrado | solo local: `local/cv/` (si se publica, `/cv/`) | `cv-academico-…`, `cv-…-academic-…` |
 
-- GitHub Pages: `valentinogambino.github.io/cv`, repo `valentinogambino/cv`,
-  servido desde `main` + `/docs`.
+- GitHub Pages: sitio de usuario `valentinogambino.github.io`, repo
+  `valentinogambino/valentinogambino.github.io`, servido desde `main` +
+  `/docs`. La raíz redirige a `/resume/` hasta que exista el portfolio. Cada
+  documento guarda sus PDF en su propia carpeta.
 - El CV no se publica hasta que el usuario lo revise y lo decida. Si se
   publica: por link, sin enlazarlo y con `noindex` (`publish: true` en
   `data/cv.json`).
@@ -92,6 +94,7 @@ Sin `npm install`: Node 24 con módulos nativos. La prueba ATS usa `pdftotext`
     cuentan como materias; de ellos están aprobados Complementos de
     Matemática e Inglés I).
   - TUP: desde 2024 (plan 2024).
+  - Egreso previsto: UCA 2029, TUP 2027.
   - Ingeniería Mecánica UTN (2024–2025): estudios previos.
   - Promedios: donde existen (TUP, UTN Mecánica, IPS), con escala /10.
   - Nombre legal: Valentino Tomas Gambino, sin tilde, como en el
@@ -120,9 +123,6 @@ Sin `npm install`: Node 24 con módulos nativos. La prueba ATS usa `pdftotext`
   dicen "acreditado, noviembre 2020" (falta lugar, duración y tareas).
 - Habilidades: con los proyectos cargados, sacar de Programación lo que no
   respalde ningún proyecto ni se pueda defender en una entrevista técnica.
-- URLs: decidir si se pasa a un sitio de usuario (`/resume/` para los
-  resumes, `/cv/` para el académico, la raíz para el portfolio). Antes,
-  confirmar si ya se compartió algún link a `/cv/`.
 - Teléfono: decidir si se genera un PDF privado con teléfono, fuera de
   `docs/` y `local/` (implica cambiar la regla de datos sensibles y la
   guardia).
@@ -134,8 +134,8 @@ Sin `npm install`: Node 24 con módulos nativos. La prueba ATS usa `pdftotext`
 - Reemplazar en `fuentes/` la planilla del plan de la UCA por la versión
   actualizada (la de `fuentes/` es de dic. 2025 y no marca las materias
   aprobadas en 2026).
-- Fecha de egreso esperado de UCA y TUP (MIT pide mes y año): hoy va "año –
-  actualidad".
+- Mes de egreso previsto de UCA y TUP: MIT pide mes y año, hoy va solo el
+  año (UCA 2029, TUP 2027).
 - Pasar la URL de LinkedIn y cargarla en `contact.linkedin`.
 - El usuario tiene que corregir Techint para que coincida con el CV:
   - UCA: desde 2026, 9 de 62 materias (Techint dice 10 de 63).
