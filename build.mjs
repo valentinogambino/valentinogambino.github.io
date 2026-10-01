@@ -10,7 +10,8 @@ import { tmpdir } from 'node:os';
 import { execFileSync } from 'node:child_process';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { checkSensible } from './scripts/check-sensible.mjs';
-import { checkAts, documentText } from './scripts/check-ats.mjs';
+import { checkAts, checkText, documentText } from './scripts/check-ats.mjs';
+import { resumeDocx } from './scripts/docx.mjs';
 
 const ROOT = dirname(fileURLToPath(import.meta.url));
 const OUT = { publish: join(ROOT, 'docs'), local: join(ROOT, 'local') };
@@ -145,6 +146,9 @@ function render(key, lang) {
   // Los PDF viven en la carpeta del documento, junto a la página en español.
   const file = (paper) => `${doc.file[lang]}-${paper}.pdf`;
   const pdfHref = (paper) => `${lang === 'en' ? '../' : ''}${file(paper)}`;
+  // El resume también sale en Word para los portales que no aceptan PDF.
+  const docxFile = (paper) => `${doc.file[lang]}-${paper}.docx`;
+  const docxHref = (paper) => `${lang === 'en' ? '../' : ''}${docxFile(paper)}`;
 
   const body = [
     header(lang),
@@ -180,6 +184,10 @@ ${html}
     `<a href="${lang === 'es' ? 'en/' : '../'}" hreflang="${other}" lang="${other}">${esc(L.otherLang)}</a>`,
     `<a href="${pdfHref('a4')}" download>${esc(L.pdfA4)}</a>`,
     `<a href="${pdfHref('letter')}" download>${esc(L.pdfLetter)}</a>`,
+    ...(doc.kind === 'resume' ? [
+      `<a href="${docxHref('a4')}" download>${esc(L.docxA4)}</a>`,
+      `<a href="${docxHref('letter')}" download>${esc(L.docxLetter)}</a>`,
+    ] : []),
   ].join('\n');
 
   const vars = {
@@ -198,7 +206,14 @@ ${html}
   const out = join(outRoot, path, 'index.html');
   mkdirSync(dirname(out), { recursive: true });
   writeFileSync(out, html);
+  const docx = doc.kind !== 'resume' ? [] : Object.keys(PAPERS).map((paper) => {
+    const docxPath = join(outRoot, doc.path, docxFile(paper));
+    const { buffer, text } = resumeDocx(body, { paper, title: vars.title, author: cv.name, lang });
+    writeFileSync(docxPath, buffer);
+    return { file: docxPath, text };
+  });
   return {
+    docx,
     key, lang, kind: doc.kind, html: out,
     text: documentText(body),
     pdfs: Object.keys(PAPERS).map((paper) => ({ paper, file: join(outRoot, doc.path, file(paper)) })),
@@ -262,6 +277,15 @@ for (const key of Object.keys(cv.documents)) {
   for (const lang of LANGS) pages.push(render(key, lang));
 }
 console.log(`HTML: ${pages.length} páginas`);
+
+// El Word sale del mismo HTML: tiene que traer todo el texto de la página, en orden.
+const docxFailures = pages.flatMap((p) => p.docx.flatMap(({ file, text }) =>
+  checkText(text, p.text).map((f) => `${relative(ROOT, file)}: ${f}`)));
+if (docxFailures.length) {
+  console.error('check-docx falló:\n  ' + docxFailures.join('\n  '));
+  process.exit(1);
+}
+console.log(`Word: ${pages.reduce((n, p) => n + p.docx.length, 0)} archivos`);
 
 // La guardia corre sobre los HTML antes de imprimir: los PDF salen de esos mismos
 // HTML (y comprimidos no se pueden revisar con regex). Si falla, se borran docs/ y
