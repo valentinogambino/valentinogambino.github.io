@@ -68,6 +68,8 @@ function coursework(e, key, lang) {
   return [...new Set(Object.values(e.coursework ?? {}).flatMap((c) => c[lang] ?? []))];
 }
 
+const inDoc = (item, doc) => !item.only || item.only.includes(doc.id);
+
 const languagesLine = (lang) =>
   cv.languages.map((l) => `${t(l.name, lang)} (${t(l.level, lang)})`).join(', ');
 
@@ -98,7 +100,8 @@ const sections = {
     });
   }).join('\n'),
 
-  experience: (doc, lang, L) => cv.experience.map((x) => entry(doc.kind, {
+  // En experiencia y proyectos, "only" limita la entrada a esos documentos.
+  experience: (doc, lang, L) => cv.experience.filter((x) => inDoc(x, doc)).map((x) => entry(doc.kind, {
     org: t(x.org, lang),
     place: t(x.location, lang),
     title: t(x.role, lang),
@@ -107,7 +110,7 @@ const sections = {
   })).join('\n'),
 
   // Sample MIT 2025: "Título | tecnologías" con la fecha a la derecha.
-  projects: (doc, lang, L) => cv.projects.map((p) => entry(doc.kind, {
+  projects: (doc, lang, L) => cv.projects.filter((p) => inDoc(p, doc)).map((p) => entry(doc.kind, {
     org: t(p.title, lang),
     place: (p.tools ?? []).map((x) => t(x, lang)).join(', '),
     when: p.end ? period(p.start, p.end, L) : p.start,
@@ -119,7 +122,7 @@ const sections = {
   skills: (doc, lang, L) => {
     const lines = doc.skillOrder.map((key) => {
       const g = cv.skills[key];
-      const items = g.items.filter((i) => !i.only || i.only.includes(doc.id));
+      const items = g.items.filter((i) => inDoc(i, doc));
       return `<b>${esc(t(g.label, lang))}:</b> ${items.map((i) => esc(t(i, lang))).join(', ')}`;
     });
     if (doc.kind === 'resume') lines.push(`<b>${esc(L.languages)}:</b> ${esc(languagesLine(lang))}`);

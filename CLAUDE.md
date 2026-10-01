@@ -99,6 +99,8 @@ Sin `npm install`: Node 24 con módulos nativos. La prueba ATS usa `pdftotext`
   - Promedios: donde existen (TUP, UTN Mecánica, IPS), con escala /10.
   - Nombre legal: Valentino Tomas Gambino, sin tilde, como en el
     preanalítico de la UTN y el FCE.
+  - Prácticas profesionalizantes del IPS (2020): fueron en pandemia, no van
+    como experiencia.
   - Inglés: B2 según el FCE (dic. 2024). Italiano y portugués: básico.
     Español: nativo.
 - Ningún dato se inventa: todo sale de `fuentes/` o de una confirmación
@@ -116,11 +118,10 @@ Sin `npm install`: Node 24 con módulos nativos. La prueba ATS usa `pdftotext`
 
 ## Pendientes
 
-- Proyectos: el usuario tiene que contar qué proyectos reales tiene (TUP, IPS,
-  personales) para la sección de proyectos, con verbos de acción y PAR.
-  Hasta entonces el resume sale sin esa sección. Las prácticas
-  profesionalizantes del IPS entran si fueron trabajo real: las fuentes solo
-  dicen "acreditado, noviembre 2020" (falta lugar, duración y tareas).
+- Proyectos: al 2026-10-01 el usuario no tiene proyectos para cargar; el
+  resume sale sin esa sección. Cuando aparezca uno: datos del usuario,
+  verbos de acción y PAR, y `only` si va en un solo resume. El generador de
+  este repo no se carga como proyecto (decisión del usuario).
 - Habilidades: con los proyectos cargados, sacar de Programación lo que no
   respalde ningún proyecto ni se pueda defender en una entrevista técnica.
 - Teléfono: decidir si se genera un PDF privado con teléfono, fuera de
