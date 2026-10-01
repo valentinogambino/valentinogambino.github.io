@@ -70,12 +70,17 @@ const languagesLine = (lang) =>
   cv.languages.map((l) => `${t(l.name, lang)} (${t(l.level, lang)})`).join(', ');
 
 const sections = {
+  // educationMerge { origen: destino }: el origen no lleva entrada propia y su
+  // mergedNote cierra la entrada de destino (ej. Mecánica UTN dentro de la UCA).
   education: (doc, lang, L) => doc.educationOrder.map((key) => {
     const e = cv.education[key];
+    const merged = Object.entries(doc.educationMerge ?? {})
+      .filter(([, into]) => into === key).map(([from]) => t(cv.education[from].mergedNote, lang));
     const facts = [
-      e.progress && L.progress.replace('{approved}', e.progress.approved).replace('{total}', e.progress.total),
+      doc.progress && e.progress && L.progress.replace('{approved}', e.progress.approved).replace('{total}', e.progress.total),
       t(e.detail, lang),
       e.gpa != null && L.gpa.replace('{gpa}', decimal(e.gpa, lang)),
+      ...merged,
     ].filter(Boolean).map(sentence).map(esc).join(' ');
     const courses = coursework(e, doc.coursework, lang);
     const label = doc.coursework === 'all' ? L.courseworkAll : L.coursework;
@@ -108,10 +113,12 @@ const sections = {
   })).join('\n'),
 
   // Una línea por categoría, sin niveles; en el resume los idiomas cierran la sección.
+  // Un ítem con "only" sale solo en esos documentos.
   skills: (doc, lang, L) => {
     const lines = doc.skillOrder.map((key) => {
       const g = cv.skills[key];
-      return `<b>${esc(t(g.label, lang))}:</b> ${g.items.map((i) => esc(t(i, lang))).join(', ')}`;
+      const items = g.items.filter((i) => !i.only || i.only.includes(doc.id));
+      return `<b>${esc(t(g.label, lang))}:</b> ${items.map((i) => esc(t(i, lang))).join(', ')}`;
     });
     if (doc.kind === 'resume') lines.push(`<b>${esc(L.languages)}:</b> ${esc(languagesLine(lang))}`);
     return lines.map((l) => `<p class="hang">${l}</p>`).join('\n');
@@ -119,11 +126,12 @@ const sections = {
 
   languages: (doc, lang) => `<p>${esc(languagesLine(lang))}</p>`,
 
-  interests: (doc, lang) => `<p>${esc(t(cv.interests, lang).join(', '))}</p>`,
+  certifications: (doc, lang) => cv.certifications
+    .map((c) => `<p>${esc(`${t(c.name, lang)}. ${c.issuer}, ${t(c.date, lang)}.`)}</p>`).join('\n'),
 };
 
 function render(key, lang) {
-  const doc = cv.documents[key];
+  const doc = { ...cv.documents[key], id: key };
   const L = cv.labels[lang];
   const other = lang === 'es' ? 'en' : 'es';
   const outRoot = doc.publish ? OUT.publish : OUT.local;

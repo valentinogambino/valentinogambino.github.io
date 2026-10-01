@@ -39,9 +39,11 @@ Sin `npm install`: Node 24 con módulos nativos. La prueba ATS usa `pdftotext`
 
 - `data/cv.json` es la única fuente de contenido; los textos traducibles son
   `{es, en}`. `documents` define cada documento: tipo (`resume`/`cv`),
-  secciones, orden de formación y habilidades, qué `coursework` muestra y si
-  se publica. Las secciones vacías (`experience`, `projects`) y `linkedin`
-  vacío no se renderizan.
+  secciones, orden de formación y habilidades, qué `coursework` muestra, si
+  muestra el avance (`progress`) y si se publica. `educationMerge` funde una
+  entrada en otra (su `mergedNote` va dentro de la de destino), y un ítem de
+  habilidad con `only` sale solo en esos documentos. Las secciones vacías
+  (`experience`, `projects`) y `linkedin` vacío no se renderizan.
 - `build.mjs` rellena `src/template.html`. Imprime cada página en A4 y en
   Carta con una copia temporal que fija `@page size`. Después pisa `/Creator`
   y `/Producer` del PDF con texto del mismo largo.
@@ -116,6 +118,14 @@ Sin `npm install`: Node 24 con módulos nativos. La prueba ATS usa `pdftotext`
   Hasta entonces el resume sale sin esa sección. Las prácticas
   profesionalizantes del IPS entran si fueron trabajo real: las fuentes solo
   dicen "acreditado, noviembre 2020" (falta lugar, duración y tareas).
+- Habilidades: con los proyectos cargados, sacar de Programación lo que no
+  respalde ningún proyecto ni se pueda defender en una entrevista técnica.
+- URLs: decidir si se pasa a un sitio de usuario (`/resume/` para los
+  resumes, `/cv/` para el académico, la raíz para el portfolio). Antes,
+  confirmar si ya se compartió algún link a `/cv/`.
+- Teléfono: decidir si se genera un PDF privado con teléfono, fuera de
+  `docs/` y `local/` (implica cambiar la regla de datos sensibles y la
+  guardia).
 - Cover letter, portfolio y other career writing: fuera del proyecto por
   ahora (reglas resumidas en `GUIA.md` §7).
 - CV académico: el usuario lo revisa en local y decide si se publica.
