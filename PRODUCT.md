@@ -8,7 +8,7 @@ web + PDF
 
 HTML y CSS estáticos, sin framework y sin JS en la página. `build.mjs` (Node 24,
 sin dependencias) convierte `data/cv.json` en `docs/` (público, GitHub Pages en
-`valentinogambino.github.io/cv`) y `local/` (privado). Los PDF los imprime Edge
+`valentinogambino.github.io/resume/`) y `local/` (privado). Los PDF los imprime Edge
 headless en A4 y en Carta; la prueba ATS usa `pdftotext`.
 
 ## Users
