@@ -1,0 +1,3 @@
+#!/bin/sh
+# Frena el commit si hay datos sensibles o archivos de fuentes/ en el índice.
+exec node scripts/check-sensible.mjs --staged

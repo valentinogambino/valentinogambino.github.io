@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-01T15:00:00-03:00",
+  "title": "Design System: CV Valentino Gambino",
+  "extensions": {
+    "colorMeta": {
+      "teal-ink": { "role": "primary", "displayName": "Tinta teal", "canonical": "oklch(45% 0.085 200)", "tonalRamp": ["oklch(15% 0.085 200)", "oklch(25% 0.085 200)", "oklch(35% 0.085 200)", "oklch(45% 0.085 200)", "oklch(55% 0.085 200)", "oklch(68% 0.07 200)", "oklch(82% 0.045 200)", "oklch(94% 0.025 200)"] },
+      "teal-wash": { "role": "primary", "displayName": "Lavado teal", "canonical": "oklch(94% 0.025 200)" },
+      "graphite": { "role": "neutral", "displayName": "Grafito", "canonical": "oklch(23% 0.012 240)", "tonalRamp": ["oklch(15% 0.012 240)", "oklch(23% 0.012 240)", "oklch(33% 0.012 240)", "oklch(43% 0.014 240)", "oklch(58% 0.012 240)", "oklch(72% 0.01 240)", "oklch(84% 0.01 230)", "oklch(95.5% 0.006 230)"] },
+      "graphite-soft": { "role": "neutral", "displayName": "Grafito suave", "canonical": "oklch(43% 0.014 240)" },
+      "frame-line": { "role": "neutral", "displayName": "Línea de marco", "canonical": "oklch(30% 0.012 240)" },
+      "hairline": { "role": "neutral", "displayName": "Línea fina", "canonical": "oklch(84% 0.01 230)" },
+      "sheet": { "role": "neutral", "displayName": "Hoja", "canonical": "oklch(100% 0 0)" },
+      "desk": { "role": "neutral", "displayName": "Mesa", "canonical": "oklch(95.5% 0.006 230)" }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Nombre", "purpose": "Solo el nombre en el rótulo." },
+      "headline": { "displayName": "Título de sección", "purpose": "Mayúsculas teal seguidas de línea fina." },
+      "title": { "displayName": "Entrada", "purpose": "Carrera o puesto." },
+      "body": { "displayName": "Texto", "purpose": "Cuerpo con numerales tabulares." },
+      "label": { "displayName": "Etiqueta de campo", "purpose": "Solo campos del rótulo." }
+    },
+    "shadows": [],
+    "motion": [],
+    "breakpoints": [{ "name": "stack", "value": "40rem" }]
+  },
+  "components": [
+    {
+      "name": "Rótulo",
+      "kind": "custom",
+      "refersTo": "title-block-cell",
+      "description": "Encabezado tipo title block de plano: nombre, campos etiquetados y revisión.",
+      "html": "<header class=\"ds-tb\"><div class=\"ds-tb-name\"><h1>Valentino Gambino</h1><p>Técnico Mecánico · Estudiante de Ingeniería Industrial</p></div><dl class=\"ds-tb-fields\"><div><dt>Email</dt><dd><a href=\"#\">gambinovt@gmail.com</a></dd></div><div><dt>Ubicación</dt><dd>Rosario, Santa Fe, Argentina</dd></div><div class=\"ds-tb-rev\"><dt>Rev.</dt><dd>2026-2</dd></div></dl></header>",
+      "css": ".ds-tb{display:grid;grid-template-columns:1.7fr 1fr;border:1px solid oklch(30% 0.012 240);font-family:Barlow,system-ui,sans-serif;color:oklch(23% 0.012 240);background:#fff}.ds-tb-name{padding:1rem 1.25rem;border-right:1px solid oklch(30% 0.012 240);display:flex;flex-direction:column;justify-content:flex-end;gap:.375rem}.ds-tb-name h1{margin:0;font-family:'Barlow Semi Condensed',Barlow,sans-serif;font-weight:700;font-size:2.5rem;line-height:1;letter-spacing:-.015em}.ds-tb-name p{margin:0;color:oklch(43% 0.014 240);font-size:1.125rem}.ds-tb-fields{margin:0;display:grid}.ds-tb-fields>div{padding:.5rem .875rem;border-bottom:1px solid oklch(84% 0.01 230)}.ds-tb-fields>div:last-child{border-bottom:0}.ds-tb-fields dt{font-family:'Barlow Semi Condensed',sans-serif;font-weight:600;font-size:.6875rem;letter-spacing:.08em;text-transform:uppercase;color:oklch(43% 0.014 240)}.ds-tb-fields dd{margin:0}.ds-tb-fields a{color:oklch(45% 0.085 200);text-underline-offset:.2em}.ds-tb-rev{display:flex;justify-content:space-between;align-items:baseline;background:oklch(94% 0.025 200)}.ds-tb-rev dd{font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;color:oklch(45% 0.085 200)}"
+    },
+    {
+      "name": "Título de sección",
+      "kind": "custom",
+      "refersTo": "headline",
+      "description": "Título en mayúsculas teal con línea fina hasta el borde.",
+      "html": "<h2 class=\"ds-h2\">Formación</h2>",
+      "css": ".ds-h2{display:flex;align-items:center;gap:.75rem;font-family:'Barlow Semi Condensed',sans-serif;font-weight:600;font-size:.9375rem;letter-spacing:.09em;text-transform:uppercase;color:oklch(45% 0.085 200)}.ds-h2::after{content:'';flex:1;height:1px;background:oklch(84% 0.01 230)}"
+    },
+    {
+      "name": "Link",
+      "kind": "custom",
+      "refersTo": "text-link",
+      "description": "Link de texto teal; los controles de idioma y PDF usan la misma tinta.",
+      "html": "<a class=\"ds-link\" href=\"#\">Descargar PDF</a>",
+      "css": ".ds-link{color:oklch(45% 0.085 200);font-family:'Barlow Semi Condensed',sans-serif;font-weight:600;font-size:.8125rem;letter-spacing:.04em;text-transform:uppercase;text-decoration-thickness:1px;text-underline-offset:.2em}.ds-link:hover{text-decoration-thickness:2px}.ds-link:focus-visible{outline:2px solid oklch(45% 0.085 200);outline-offset:3px}"
+    }
+  ],
+  "narrative": {
+    "northStar": "La hoja de plano",
+    "overview": "El CV se lee como una lámina de dibujo técnico: marco de línea fina doble y un rótulo con nombre, contacto y número de revisión. Densidad sobria, jerarquía por peso tipográfico, líneas y una sola tinta. Todo es texto real en una columna.",
+    "keyCharacteristics": ["Rótulo enmarcado con celdas etiquetadas; la celda de revisión va lavada en teal.", "Una columna, sin íconos ni barras; niveles en palabras.", "Barlow Semi Condensed + Barlow, numerales tabulares.", "Esquinas rectas en todo.", "Impresión A4 en una página."],
+    "rules": [
+      { "name": "The One Ink Rule", "body": "El teal solo marca la estructura (títulos, revisión, links). Nunca va en bloques de texto ni en fondos grandes.", "section": "colors" },
+      { "name": "The Label Is A Field Rule", "body": "Las etiquetas en mayúsculas pequeñas solo nombran campos del rótulo. Nunca van como eyebrow arriba de un título.", "section": "typography" },
+      { "name": "The One Sheet Rule", "body": "Si un cambio de contenido manda el PDF a una segunda página, se ajusta primero el espaciado de impresión, no el texto.", "section": "elevation" }
+    ],
+    "dos": ["Do escribir los niveles en palabras (\"Intermedio: …\"), agrupando los ítems del mismo nivel.", "Do mantener el número de revisión en el rótulo y en el pie.", "Do verificar que cada PDF tenga 1 página y que las páginas no tengan scroll horizontal a 402px después de cada cambio."],
+    "donts": ["Don't usar íconos, barras o anillos de nivel, ni una barra lateral (elección explícita del dueño por ATS).", "Don't redondear esquinas ni agregar sombras.", "Don't poner etiquetas tipo eyebrow arriba de los títulos de sección."]
+  }
+}

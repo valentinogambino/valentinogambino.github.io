@@ -1,0 +1,266 @@
+/* CV — hoja de plano técnico. Tokens primero; todo color sale de acá. */
+:root {
+  color-scheme: light;
+  --desk: oklch(95.5% 0.006 230);
+  --paper: oklch(100% 0 0);
+  --ink: oklch(23% 0.012 240);
+  --ink-2: oklch(43% 0.014 240);
+  --rule: oklch(84% 0.01 230);
+  --rule-strong: oklch(30% 0.012 240);
+  --accent: oklch(45% 0.085 200);
+  --accent-soft: oklch(94% 0.025 200);
+
+  --font-body: "Barlow", "Segoe UI", system-ui, sans-serif;
+  --font-head: "Barlow Semi Condensed", "Barlow", "Segoe UI", system-ui, sans-serif;
+
+  --step--1: 0.8125rem;
+  --step-0: 1rem;
+  --step-1: 1.125rem;
+  --step-4: clamp(2rem, 1.35rem + 2.8vw, 2.875rem);
+
+  --gap: 1.5rem;
+  --pad: clamp(1.25rem, 0.6rem + 3vw, 3rem);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--desk);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: var(--step-0);
+  line-height: 1.5;
+  font-variant-numeric: tabular-nums;
+  padding:
+    max(1rem, env(safe-area-inset-top))
+    max(1rem, env(safe-area-inset-right))
+    max(2rem, env(safe-area-inset-bottom))
+    max(1rem, env(safe-area-inset-left));
+}
+
+::selection { background: var(--accent-soft); color: var(--ink); }
+
+a {
+  color: var(--accent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+a:hover { text-decoration-thickness: 2px; }
+a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+h1, h2, h3, p, dl, dd, ul { margin: 0; }
+ul { padding: 0; list-style: none; }
+
+/* Controles: idioma y PDF. Fuera de la hoja, discretos. */
+.controls {
+  max-width: 50rem;
+  margin: 0 auto 0.75rem;
+  display: flex;
+  justify-content: flex-end;
+  gap: 1.25rem;
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: var(--step--1);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* La hoja, con su marco de dibujo. */
+.sheet {
+  max-width: 50rem;
+  margin: 0 auto;
+  background: var(--paper);
+  border: 1px solid var(--rule-strong);
+  outline: 1px solid var(--rule-strong);
+  outline-offset: 5px;
+  padding: var(--pad);
+}
+
+/* Rótulo (title block). */
+.title-block {
+  display: grid;
+  grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr);
+  border: 1px solid var(--rule-strong);
+}
+.tb-name {
+  padding: 1rem 1.25rem 1.125rem;
+  border-right: 1px solid var(--rule-strong);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 0.375rem;
+}
+.tb-label {
+  display: block;
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+h1 {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: var(--step-4);
+  line-height: 1;
+  letter-spacing: -0.015em;
+}
+.headline span { white-space: nowrap; }
+.headline {
+  font-size: var(--step-1);
+  color: var(--ink-2);
+  line-height: 1.35;
+  text-wrap: balance;
+}
+.tb-fields { display: grid; }
+.tb-fields > div {
+  padding: 0.5rem 0.875rem 0.5625rem;
+  border-bottom: 1px solid var(--rule);
+  min-width: 0;
+}
+.tb-fields > div:last-child { border-bottom: 0; }
+.tb-fields dd {
+  font-size: 0.9375rem;
+  overflow-wrap: anywhere;
+}
+.tb-rev {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  background: var(--accent-soft);
+}
+.tb-rev dd {
+  font-family: var(--font-head);
+  font-weight: 700;
+  color: var(--accent);
+}
+
+/* Secciones. */
+section { margin-top: 2.25rem; }
+h2 {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: 0.9375rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.875rem;
+}
+h2::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--rule);
+}
+
+.summary p {
+  max-width: 68ch;
+  text-wrap: pretty;
+}
+
+/* Formación / experiencia. */
+.entries { display: grid; gap: 1.125rem; }
+.entry {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  column-gap: var(--gap);
+  row-gap: 0.125rem;
+}
+.entry h3 {
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: var(--step-1);
+  line-height: 1.25;
+}
+.entry .when {
+  grid-column: 2;
+  grid-row: 1;
+  align-self: baseline;
+  font-family: var(--font-head);
+  font-weight: 500;
+  color: var(--ink-2);
+  white-space: nowrap;
+}
+.entry .where { color: var(--ink-2); grid-column: 1 / -1; }
+.entry .note { grid-column: 1 / -1; font-size: 0.9375rem; }
+
+/* Herramientas: categoría a la izquierda, niveles a la derecha. */
+.skill-list { display: grid; gap: 0.875rem; }
+.skill-group {
+  display: grid;
+  grid-template-columns: 11rem minmax(0, 1fr);
+  column-gap: var(--gap);
+}
+.skill-group dt {
+  font-family: var(--font-head);
+  font-weight: 600;
+  line-height: 1.5;
+}
+.skill-group dd { display: grid; gap: 0.25rem; }
+.lvl {
+  font-family: var(--font-head);
+  font-weight: 600;
+  color: var(--ink-2);
+}
+
+.inline-list li { display: inline; }
+.inline-list li:not(:last-child)::after { content: " · "; color: var(--ink-2); }
+
+/* Pie: número de revisión, como en un plano. */
+.sheet-foot {
+  margin-top: 2.5rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--rule-strong);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.25rem 1.5rem;
+  font-family: var(--font-head);
+  font-size: var(--step--1);
+  color: var(--ink-2);
+}
+
+/* Móvil. */
+@media (max-width: 40rem) {
+  body { padding-left: max(0.5rem, env(safe-area-inset-left)); padding-right: max(0.5rem, env(safe-area-inset-right)); }
+  .controls { padding-inline: 0.5rem; }
+  .sheet { outline-offset: 3px; }
+  .title-block { grid-template-columns: minmax(0, 1fr); }
+  .tb-name { border-right: 0; border-bottom: 1px solid var(--rule-strong); }
+  .skill-group { grid-template-columns: minmax(0, 1fr); row-gap: 0.25rem; }
+  .entry { grid-template-columns: minmax(0, 1fr); }
+  .entry .when { grid-column: 1; grid-row: auto; }
+}
+
+/* Impresión A4. */
+@page { size: A4; margin: 13mm 15mm 14mm; }
+@media print {
+  html { font-size: 10.5pt; }
+  body { background: none; padding: 0; line-height: 1.4; }
+  .controls { display: none; }
+  .sheet { max-width: none; border: 0; outline: 0; padding: 0; }
+  h1 { font-size: 24pt; }
+  .headline { font-size: 11.5pt; }
+  section { margin-top: 1rem; }
+  h2 { margin-bottom: 0.45rem; }
+  .entries { gap: 0.5rem; }
+  .skill-list { gap: 0.4rem; }
+  .skill-group { grid-template-columns: 9.5rem minmax(0, 1fr); }
+  .sheet-foot { margin-top: 1rem; break-before: avoid; }
+  a { color: var(--ink); text-decoration: none; }
+  .entry, .skill-group, h2 { break-inside: avoid; }
+  h2 { break-after: avoid; }
+  .title-block, .tb-rev { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
