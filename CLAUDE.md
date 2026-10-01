@@ -95,6 +95,8 @@ Sin `npm install`: Node 24 con módulos nativos. La prueba ATS usa `pdftotext`
     Matemática e Inglés I).
   - TUP: desde 2024 (plan 2024).
   - Egreso previsto: UCA 2029, TUP 2027.
+  - Teléfono: no aparece en ningún documento, ni en un PDF privado (decisión
+    del usuario).
   - Ingeniería Mecánica UTN (2024–2025): estudios previos.
   - Promedios: donde existen (TUP, UTN Mecánica, IPS), con escala /10.
   - Nombre legal: Valentino Tomas Gambino, sin tilde, como en el
@@ -124,9 +126,6 @@ Sin `npm install`: Node 24 con módulos nativos. La prueba ATS usa `pdftotext`
   resume sale sin esa sección. Cuando aparezca uno: datos del usuario,
   verbos de acción y PAR, y `only` si va en un solo resume. El generador de
   este repo no se carga como proyecto (decisión del usuario).
-- Teléfono: decidir si se genera un PDF privado con teléfono, fuera de
-  `docs/` y `local/` (implica cambiar la regla de datos sensibles y la
-  guardia).
 - Cover letter, portfolio y other career writing: fuera del proyecto por
   ahora (reglas resumidas en `GUIA.md` §7).
 - CV académico: el usuario lo revisa en local y decide si se publica.
@@ -137,10 +136,18 @@ Sin `npm install`: Node 24 con módulos nativos. La prueba ATS usa `pdftotext`
   aprobadas en 2026).
 - Mes de egreso previsto de UCA y TUP: MIT pide mes y año, hoy va solo el
   año (UCA 2029, TUP 2027).
-- Pasar la URL de LinkedIn y cargarla en `contact.linkedin`.
-- El usuario tiene que corregir Techint para que coincida con el CV:
-  - UCA: desde 2026, 9 de 62 materias (Techint dice 10 de 63).
-  - TUP: desde 2024 (Techint dice 2022), 8 de 18 materias.
-  - Sumar Ingeniería Mecánica UTN.
-  - Inglés: B2 con el FCE (Techint dice "Avanzado").
+- El usuario tiene que corregir su perfil de Techint Careers (revisado contra
+  `fuentes/resumen.png` el 2026-10-01):
+  - Mis documentos: reemplazar `Borrador.docx` (23/04/2025) por el PDF
+    actual (`cv-valentino-gambino-a4.pdf` de `/resume/`).
+  - UCA: fecha de inicio 01/03/2024 → 2026; materias aprobadas 21 → 9;
+    materias totales 63 → 62. Fecha estimada de graduación 03/2030 y fin de
+    cursada 12/2029: el CV dice egreso previsto 2029, alinear.
+  - TUP: fecha de inicio 01/03/2022 → 2024. Materias: Techint dice 9 de 19
+    y el CV 8 de 18; falta confirmar cuál es el dato correcto.
+  - Sumar Ingeniería Mecánica UTN FRRo (2024–2025, 7 materias, promedio
+    7,86/10), que no figura.
+  - Inglés: "Avanzado" → el nivel que corresponda a B2 (FCE, dic. 2024).
+  - Herramientas: sumar las del CV que faltan (Solid Edge, AutoCAD,
+    programación, bases de datos).
 - Cargar la experiencia laboral cuando exista.
