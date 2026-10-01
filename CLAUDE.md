@@ -9,11 +9,11 @@ resuelve de memoria.
 
 ## Documentos
 
-| Documento | Para qué | Dónde | PDF |
+| Documento | Para qué | Dónde | Descargas |
 |---|---|---|---|
-| Resume Ingeniería (principal) | industria | `/resume/` · `/resume/en/` | `cv-valentino-gambino-{a4,letter}.pdf` · `resume-valentino-gambino-{a4,letter}.pdf` |
+| Resume Ingeniería (principal) | industria | `/resume/` · `/resume/en/` | `cv-valentino-gambino-{a4,letter}.{pdf,docx}` · `resume-valentino-gambino-{a4,letter}.{pdf,docx}` |
 | Resume Desarrollo | software; se comparte por link, `noindex` | `/resume/dev/` · `/resume/dev/en/` | ídem con `-dev` |
-| CV académico (maestro) | ayudantía, beca, intercambio, posgrado | solo local: `local/cv/` (si se publica, `/cv/`) | `cv-academico-…`, `cv-…-academic-…` |
+| CV académico (maestro) | ayudantía, beca, intercambio, posgrado | solo local: `local/cv/` (si se publica, `/cv/`) | `cv-academico-…`, `cv-…-academic-…` (solo PDF) |
 
 - GitHub Pages: sitio de usuario `valentinogambino.github.io`, repo
   `valentinogambino/valentinogambino.github.io`, servido desde `main` +
@@ -25,9 +25,9 @@ resuelve de memoria.
 
 ## Comandos
 
-- `node build.mjs`: regenera `docs/` y `local/` (6 HTML, 12 PDF con Edge
-  headless), corre la guardia de datos sensibles y la prueba ATS. `--no-pdf`
-  saltea los PDF y la prueba.
+- `node build.mjs`: regenera `docs/` y `local/` (6 HTML, 8 Word de los
+  resumes, 12 PDF con Edge headless), corre la guardia de datos sensibles y la
+  prueba ATS. `--no-pdf` saltea los PDF y su prueba.
 - `node scripts/check-sensible.mjs`: guardia sola sobre `docs/`, `local/` y
   `data/`. `--staged` revisa el índice de git (lo usa el hook).
 - Hook pre-commit: `.githooks/pre-commit`; se activa una vez por clon con
@@ -54,6 +54,11 @@ Sin `npm install`: Node 24 con módulos nativos. La prueba ATS usa `pdftotext`
   o si se pasa de hojas (resume 1, CV 4). Si falla por una línea larga cortada
   junto a una fecha a la derecha, se acorta el contenido, no se afloja la
   prueba.
+- `scripts/docx.mjs`: arma el Word de cada resume desde el mismo HTML, sin
+  dependencias (ZIP con `node:zlib`, fecha fija para que el archivo no cambie
+  si el contenido no cambia). El build verifica que traiga todo el texto de la
+  página en orden. El CV académico, con su columna de etiquetas, no tiene
+  Word.
 - `src/styles.css`: Calibri 11pt (Carlito en la web). Resume con títulos a
   todo el ancho; CV con etiquetas a la izquierda y número de página. Debe
   funcionar a 402px sin scroll horizontal.

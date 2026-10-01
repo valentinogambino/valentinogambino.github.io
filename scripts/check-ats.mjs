@@ -40,9 +40,17 @@ function pdfText(pdf) {
 
 export function checkAts(pdf, fragments, maxPages, { order = true } = {}) {
   const raw = pdfText(pdf);
-  const problems = [];
   const pages = raw.split('\f').filter((p) => p.trim()).length;
-  if (pages > maxPages) problems.push(`${pages} hojas (máximo ${maxPages})`);
+  return [
+    ...(pages > maxPages ? [`${pages} hojas (máximo ${maxPages})`] : []),
+    ...checkText(raw, fragments, { order }),
+  ];
+}
+
+// Cada fragmento de la página tiene que estar en el texto extraído (y en orden, si
+// order). La usan el PDF y el Word.
+export function checkText(raw, fragments, { order = true } = {}) {
+  const problems = [];
   const text = norm(raw);
   let at = 0;
   for (const f of fragments) {
