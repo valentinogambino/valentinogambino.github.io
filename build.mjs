@@ -1,16 +1,22 @@
-// Genera el CV en formato MIT (CAPD): data/cv.json + src/ -> docs/ (4 HTML + 4 PDF).
-//   node build.mjs           HTML + PDF
+// Genera los documentos de data/cv.json según GUIA.md (MIT CAPD).
+//   Resume (ing, dev): docs/  -> GitHub Pages
+//   CV académico:      local/ -> solo en esta compu, no se publica
+// Cada documento sale en ES y EN, en HTML y en PDF A4 y Carta.
+//   node build.mjs           HTML + PDF + test ATS
 //   node build.mjs --no-pdf  solo HTML (más rápido mientras se edita)
-import { readFileSync, writeFileSync, mkdirSync, copyFileSync, existsSync, rmSync } from 'node:fs';
-import { join, dirname } from 'node:path';
+import { readFileSync, writeFileSync, mkdirSync, copyFileSync, existsSync, rmSync, mkdtempSync } from 'node:fs';
+import { join, dirname, relative } from 'node:path';
+import { tmpdir } from 'node:os';
 import { execFileSync } from 'node:child_process';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { checkSensible } from './scripts/check-sensible.mjs';
+import { checkAts, documentText } from './scripts/check-ats.mjs';
 
 const ROOT = dirname(fileURLToPath(import.meta.url));
-const OUT = join(ROOT, 'docs');
+const OUT = { publish: join(ROOT, 'docs'), local: join(ROOT, 'local') };
 const LANGS = ['es', 'en'];
-const LEVEL_ORDER = ['advanced', 'intermediate', 'basic'];
+const PAPERS = { a4: 'A4', letter: 'letter' };
+const MAX_PAGES = { resume: 1, cv: 4 };
 const EDGE_PATHS = [
   'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe',
   'C:/Program Files/Microsoft/Edge/Application/msedge.exe',
@@ -22,16 +28,11 @@ const template = readFileSync(join(ROOT, 'src/template.html'), 'utf8');
 const esc = (s) => String(s)
   .replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;');
 const t = (v, lang) => (v && typeof v === 'object' ? v[lang] : v);
-
 const now = new Date();
-
-function updated(lang, L) {
-  const month = L.months[now.getMonth()];
-  return `${L.updated}: ${month} ${lang === 'es' ? 'de ' : ''}${now.getFullYear()}`;
-}
 
 const period = (start, end, L) => `${start} – ${end ?? L.present}`;
 const decimal = (n, lang) => n.toFixed(2).replace('.', lang === 'es' ? ',' : '.');
+const sentence = (s) => (/[.!?]$/.test(s) ? s : `${s}.`);
 
 function header(lang) {
   const c = cv.contact;
@@ -40,122 +41,165 @@ function header(lang) {
     const shown = c.linkedin.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '');
     parts.push(`<a href="${esc(c.linkedin)}">${esc(shown)}</a>`);
   }
-  return `<header class="cv-head">
+  return `<header class="doc-head">
   <h1>${esc(cv.name)}</h1>
-  <p class="contact">${parts.join('<span class="sep" aria-hidden="true"> • </span>')}</p>
+  <p class="contact">${parts.join('<span class="sep" aria-hidden="true"> · </span>')}</p>
 </header>`;
 }
 
-// Una entrada al estilo MIT: institución + lugar, título + fechas, y líneas de detalle.
-function entry({ org, place, title, when, lines }) {
-  return `  <article class="entry">
-    <p class="org">${esc(org)}</p>
-    <p class="place">${esc(place)}</p>
-    <p class="title">${esc(title)}</p>
-    <p class="when">${esc(when)}</p>
-${lines.filter(Boolean).map((l) => `    <p class="line">${l}</p>`).join('\n')}
-  </article>`;
+// Resume (sample MIT 2025): "Institución | Lugar" con la fecha a la derecha, título debajo.
+// CV (Sample CVs de MIT): institución y lugar en una línea, título y fecha en la siguiente.
+function entry(kind, { org, place, title, when, lines = [], bullets = [] }) {
+  const rows = kind === 'resume'
+    ? [`<p class="row"><span><b>${esc(org)}</b>${place ? ` | ${esc(place)}` : ''}</span><span class="when">${esc(when)}</span></p>`,
+       title && `<p><i>${esc(title)}</i></p>`]
+    : [`<p class="row"><b>${esc(org)}</b><span class="when">${esc(place ?? '')}</span></p>`,
+       `<p class="row"><i>${esc(title ?? '')}</i><span class="when">${esc(when)}</span></p>`];
+  return `<article class="entry">
+${[...rows, ...lines.map((l) => `<p>${l}</p>`)].filter(Boolean).join('\n')}${bullets.length
+    ? `\n<ul>\n${bullets.map((b) => `<li>${esc(b)}</li>`).join('\n')}\n</ul>` : ''}
+</article>`;
 }
 
+function coursework(e, key, lang) {
+  if (key !== 'all') return e.coursework?.[key]?.[lang] ?? [];
+  return [...new Set(Object.values(e.coursework ?? {}).flatMap((c) => c[lang] ?? []))];
+}
+
+const languagesLine = (lang) =>
+  cv.languages.map((l) => `${t(l.name, lang)} (${t(l.level, lang)})`).join(', ');
+
 const sections = {
-  education: (variantKey, lang, L) => cv.variants[variantKey].educationOrder.map((key) => {
+  education: (doc, lang, L) => doc.educationOrder.map((key) => {
     const e = cv.education[key];
     const facts = [
       e.progress && L.progress.replace('{approved}', e.progress.approved).replace('{total}', e.progress.total),
       t(e.detail, lang),
       e.gpa != null && L.gpa.replace('{gpa}', decimal(e.gpa, lang)),
-    ].filter(Boolean).map(esc).join(' ');
-    const courses = e.coursework?.[variantKey]?.[lang] ?? [];
-    return entry({
+    ].filter(Boolean).map(sentence).map(esc).join(' ');
+    const courses = coursework(e, doc.coursework, lang);
+    const label = doc.coursework === 'all' ? L.courseworkAll : L.coursework;
+    return entry(doc.kind, {
       org: t(e.institution, lang),
       place: t(e.location, lang),
       title: t(e.degree, lang),
       when: period(e.start, e.end, L),
       lines: [
         facts,
-        courses.length && `<span class="lead">${esc(L.coursework)}:</span> ${courses.map(esc).join(', ')}.`,
-      ],
+        courses.length && `<b>${esc(label)}:</b> ${courses.map(esc).join(', ')}`,
+      ].filter(Boolean),
     });
   }).join('\n'),
 
-  experience: (variantKey, lang, L) => {
-    if (!cv.experience.length) return null;
-    return cv.experience.map((x) => entry({
-      org: t(x.org, lang),
-      place: t(x.location, lang) ?? '',
-      title: t(x.role, lang),
-      when: period(x.start, x.end, L),
-      lines: (t(x.bullets, lang) ?? []).map((b) => `• ${esc(b)}`),
-    })).join('\n');
+  experience: (doc, lang, L) => cv.experience.map((x) => entry(doc.kind, {
+    org: t(x.org, lang),
+    place: t(x.location, lang),
+    title: t(x.role, lang),
+    when: period(x.start, x.end, L),
+    bullets: t(x.bullets, lang) ?? [],
+  })).join('\n'),
+
+  // Sample MIT 2025: "Título | tecnologías" con la fecha a la derecha.
+  projects: (doc, lang, L) => cv.projects.map((p) => entry(doc.kind, {
+    org: t(p.title, lang),
+    place: (p.tools ?? []).map((x) => t(x, lang)).join(', '),
+    when: p.end ? period(p.start, p.end, L) : p.start,
+    bullets: t(p.bullets, lang) ?? [],
+  })).join('\n'),
+
+  // Una línea por categoría, sin niveles; en el resume los idiomas cierran la sección.
+  skills: (doc, lang, L) => {
+    const lines = doc.skillOrder.map((key) => {
+      const g = cv.skills[key];
+      return `<b>${esc(t(g.label, lang))}:</b> ${g.items.map((i) => esc(t(i, lang))).join(', ')}`;
+    });
+    if (doc.kind === 'resume') lines.push(`<b>${esc(L.languages)}:</b> ${esc(languagesLine(lang))}`);
+    return lines.map((l) => `<p class="hang">${l}</p>`).join('\n');
   },
 
-  // Una línea por categoría, con la redacción de los ejemplos de MIT ("proficient in…; familiar with…").
-  skills: (variantKey, lang, L) => {
-    const lines = cv.variants[variantKey].skillOrder.map((key) => {
-      const group = cv.skills[key];
-      const clauses = LEVEL_ORDER.map((level) => {
-        const names = group.items.filter((i) => i.level === level).map((i) => esc(t(i.name, lang)));
-        return names.length ? `${L.levels[level]} ${names.join(', ')}` : '';
-      }).filter(Boolean);
-      clauses.push(...group.items.filter((i) => !i.level).map((i) => esc(t(i.name, lang))));
-      return `<span class="lead">${esc(t(group.label, lang))}:</span> ${clauses.join('; ')}.`;
-    });
-    lines.push(`<span class="lead">${esc(L.languages)}:</span> ${esc(t(cv.languages, lang))}.`);
-    lines.push(`<span class="lead">${esc(L.interests)}:</span> ${esc(t(cv.interests, lang))}.`);
-    return `<div class="skill-lines">
-${lines.map((l) => `  <p>${l}</p>`).join('\n')}
-</div>`;
-  },
+  languages: (doc, lang) => `<p>${esc(languagesLine(lang))}</p>`,
+
+  interests: (doc, lang) => `<p>${esc(t(cv.interests, lang).join(', '))}</p>`,
 };
 
-function render(variantKey, lang) {
-  const variant = cv.variants[variantKey];
+function render(key, lang) {
+  const doc = cv.documents[key];
   const L = cv.labels[lang];
   const other = lang === 'es' ? 'en' : 'es';
-  const path = variant.path + (lang === 'en' ? 'en/' : '');
-  const depth = path.split('/').filter(Boolean).length;
-  const root = '../'.repeat(depth);
-  const otherPath = variant.path + (other === 'en' ? 'en/' : '');
+  const outRoot = doc.publish ? OUT.publish : OUT.local;
+  const path = doc.path + (lang === 'en' ? 'en/' : '');
+  const root = '../'.repeat(path.split('/').filter(Boolean).length);
+  const file = (paper) => `${doc.file[lang]}-${paper}.pdf`;
 
   const body = [
     header(lang),
-    ...variant.sections.map((name) => {
-      const html = sections[name](variantKey, lang, L);
-      return html && `<section class="cv-section ${name}" aria-labelledby="h-${name}">
-<h2 id="h-${name}">${esc(L[name])}</h2>
-<div class="cv-body">
+    ...doc.sections.map((name) => {
+      const html = sections[name](doc, lang, L);
+      return html && `<section class="sec" aria-labelledby="h-${name}">
+<h2 id="h-${name}">${esc(L.headings[doc.kind][name])}</h2>
+<div class="sec-body">
 ${html}
 </div>
 </section>`;
     }).filter(Boolean),
-    `<footer class="cv-foot">${esc(updated(lang, L))}</footer>`,
+  ].join('\n');
+
+  const meta = [];
+  if (!doc.index) meta.push('<meta name="robots" content="noindex">');
+  if (doc.publish) {
+    const url = (l) => cv.siteUrl + doc.path + (l === 'en' ? 'en/' : '');
+    meta.push(`<link rel="canonical" href="${esc(url(lang))}">`,
+      `<link rel="alternate" hreflang="${lang}" href="${esc(url(lang))}">`,
+      `<link rel="alternate" hreflang="${other}" href="${esc(url(other))}">`);
+  }
+  // El CV lleva nombre y número de página desde la segunda hoja, como los Sample CVs.
+  if (doc.kind === 'cv') {
+    const name = cv.name.replaceAll('\\', '\\\\').replaceAll('"', '\\"');
+    meta.push(`<style>
+@page { @top-left { content: "${name}"; } @top-right { content: counter(page) "/" counter(pages); } }
+@page :first { @top-left { content: none; } @top-right { content: none; } @bottom-center { content: counter(page) "/" counter(pages); } }
+</style>`);
+  }
+
+  const controls = [
+    `<a href="${lang === 'es' ? 'en/' : '../'}" hreflang="${other}" lang="${other}">${esc(L.otherLang)}</a>`,
+    `<a href="${root}${file('a4')}" download>${esc(L.pdfA4)}</a>`,
+    `<a href="${root}${file('letter')}" download>${esc(L.pdfLetter)}</a>`,
   ].join('\n');
 
   const vars = {
     lang,
-    otherLang: other,
-    title: `CV — ${cv.name}${L.titleSuffix[variantKey]}`,
-    description: `CV — ${cv.name}`,
-    canonical: cv.siteUrl + path,
-    otherCanonical: cv.siteUrl + otherPath,
+    title: `${cv.name} — ${L.kind[doc.kind]}${L.variant[key]}`,
+    meta: meta.join('\n'),
     root,
     controlsLabel: L.controls,
-    otherLangHref: lang === 'es' ? 'en/' : '../',
-    otherLangLabel: L.otherLang,
-    pdfHref: `${root}${variant.pdf}-${lang}.pdf`,
-    downloadPdf: L.downloadPdf,
+    controls,
+    kind: doc.kind,
+    updated: `${L.updated}: ${L.months[now.getMonth()]} ${lang === 'es' ? 'de ' : ''}${now.getFullYear()}`,
     body,
   };
-  const html = template.replace(/\{\{(\w+)\}\}/g, (_, k) => (k === 'body' ? vars.body : esc(vars[k])));
-  const file = join(OUT, path, 'index.html');
-  mkdirSync(dirname(file), { recursive: true });
-  writeFileSync(file, html);
-  return { file, pdf: join(OUT, `${variant.pdf}-${lang}.pdf`) };
+  const raw = new Set(['meta', 'controls', 'body']);
+  const html = template.replace(/\{\{(\w+)\}\}/g, (_, k) => (raw.has(k) ? vars[k] : esc(vars[k])));
+  const out = join(outRoot, path, 'index.html');
+  mkdirSync(dirname(out), { recursive: true });
+  writeFileSync(out, html);
+  return {
+    key, lang, kind: doc.kind, html: out,
+    text: documentText(body),
+    pdfs: Object.keys(PAPERS).map((paper) => ({ paper, file: join(outRoot, file(paper)) })),
+  };
 }
 
-function printPdf(htmlFile, pdfFile) {
+// Edge imprime una copia temporal de la página con el tamaño de hoja fijado;
+// <base> hace que la hoja de estilos se resuelva igual que en la página real.
+function printPdf(htmlFile, paper, pdfFile, tmp) {
   const edge = EDGE_PATHS.find(existsSync);
   if (!edge) throw new Error('No encontré Microsoft Edge para generar los PDF.');
+  const page = readFileSync(htmlFile, 'utf8').replace('<head>',
+    `<head>\n<base href="${pathToFileURL(dirname(htmlFile)).href}/">`)
+    .replace('</head>', `<style>@page { size: ${PAPERS[paper]}; }</style>\n</head>`);
+  const tmpHtml = join(tmp, `${Math.random().toString(36).slice(2)}.html`);
+  writeFileSync(tmpHtml, page);
   rmSync(pdfFile, { force: true });
   execFileSync(edge, [
     '--headless=new',
@@ -163,7 +207,7 @@ function printPdf(htmlFile, pdfFile) {
     '--no-pdf-header-footer',
     '--virtual-time-budget=8000',
     `--print-to-pdf=${pdfFile}`,
-    pathToFileURL(htmlFile).href,
+    pathToFileURL(tmpHtml).href,
   ], { stdio: 'ignore' });
   if (!existsSync(pdfFile)) throw new Error(`Edge no generó ${pdfFile}`);
   scrubPdfInfo(pdfFile);
@@ -178,29 +222,47 @@ function scrubPdfInfo(pdfFile) {
   writeFileSync(pdfFile, Buffer.from(clean, 'latin1'));
 }
 
-rmSync(OUT, { recursive: true, force: true });
-mkdirSync(OUT, { recursive: true });
-copyFileSync(join(ROOT, 'src/styles.css'), join(OUT, 'styles.css'));
-writeFileSync(join(OUT, '.nojekyll'), '');
-
-const outputs = [];
-for (const variantKey of Object.keys(cv.variants)) {
-  for (const lang of LANGS) outputs.push(render(variantKey, lang));
+for (const dir of Object.values(OUT)) {
+  rmSync(dir, { recursive: true, force: true });
+  mkdirSync(dir, { recursive: true });
+  copyFileSync(join(ROOT, 'src/styles.css'), join(dir, 'styles.css'));
 }
-console.log(`HTML: ${outputs.length} páginas`);
+writeFileSync(join(OUT.publish, '.nojekyll'), '');
+
+const pages = [];
+for (const key of Object.keys(cv.documents)) {
+  for (const lang of LANGS) pages.push(render(key, lang));
+}
+console.log(`HTML: ${pages.length} páginas`);
 
 // La guardia corre sobre los HTML antes de imprimir: los PDF salen de esos mismos
-// HTML (y comprimidos no se pueden revisar con regex). Si falla, docs/ se borra
-// para que nada sensible quede en la carpeta que se publica.
+// HTML (y comprimidos no se pueden revisar con regex). Si falla, se borran docs/ y
+// local/ para que nada sensible quede en una carpeta que se publica o se comparte.
 const problems = checkSensible();
 if (problems.length) {
-  rmSync(OUT, { recursive: true, force: true });
-  console.error('Datos sensibles detectados (docs/ borrado):\n  ' + problems.join('\n  '));
+  for (const dir of Object.values(OUT)) rmSync(dir, { recursive: true, force: true });
+  console.error('Datos sensibles detectados (docs/ y local/ borrados):\n  ' + problems.join('\n  '));
   process.exit(1);
 }
 console.log('check-sensible: ok');
 
 if (!process.argv.includes('--no-pdf')) {
-  for (const { file, pdf } of outputs) printPdf(file, pdf);
-  console.log(`PDF: ${outputs.length} archivos`);
+  const tmp = mkdtempSync(join(tmpdir(), 'cv-build-'));
+  const failures = [];
+  try {
+    for (const p of pages) {
+      for (const { paper, file } of p.pdfs) {
+        printPdf(p.html, paper, file, tmp);
+        failures.push(...checkAts(file, p.text, MAX_PAGES[p.kind], { order: p.kind === 'resume' }).map((f) => `${relative(ROOT, file)}: ${f}`));
+      }
+    }
+  } finally {
+    rmSync(tmp, { recursive: true, force: true });
+  }
+  console.log(`PDF: ${pages.length * Object.keys(PAPERS).length} archivos`);
+  if (failures.length) {
+    console.error('check-ats falló:\n  ' + failures.join('\n  '));
+    process.exit(1);
+  }
+  console.log('check-ats: ok');
 }

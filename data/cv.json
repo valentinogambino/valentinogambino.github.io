@@ -1,5 +1,5 @@
 {
-  "name": "Valentino Gambino",
+  "name": "Valentino Tomas Gambino",
   "siteUrl": "https://valentinogambino.github.io/cv/",
   "contact": {
     "email": "gambinovt@gmail.com",
@@ -7,42 +7,62 @@
     "location": { "es": "Rosario, Santa Fe, Argentina", "en": "Rosario, Santa Fe, Argentina" }
   },
 
-  "variants": {
+  "documents": {
     "ing": {
+      "kind": "resume",
       "path": "",
-      "pdf": "cv-valentino-gambino",
-      "sections": ["education", "experience", "skills"],
+      "publish": true,
+      "index": true,
+      "file": { "es": "cv-valentino-gambino", "en": "resume-valentino-gambino" },
+      "sections": ["education", "experience", "projects", "skills"],
       "educationOrder": ["uca", "tup", "utnMec", "ips"],
+      "coursework": "ing",
       "skillOrder": ["cad", "manufacturing", "programming", "data", "office"]
     },
     "dev": {
+      "kind": "resume",
       "path": "dev/",
-      "pdf": "cv-valentino-gambino-dev",
-      "sections": ["education", "experience", "skills"],
+      "publish": true,
+      "index": false,
+      "file": { "es": "cv-valentino-gambino-dev", "en": "resume-valentino-gambino-dev" },
+      "sections": ["education", "experience", "projects", "skills"],
       "educationOrder": ["uca", "tup", "utnMec", "ips"],
+      "coursework": "dev",
       "skillOrder": ["programming", "data", "office", "cad", "manufacturing"]
+    },
+    "cv": {
+      "kind": "cv",
+      "path": "academico/",
+      "publish": false,
+      "index": false,
+      "file": { "es": "cv-academico-valentino-gambino", "en": "cv-valentino-gambino-academic" },
+      "sections": ["education", "interests", "experience", "projects", "skills", "languages"],
+      "educationOrder": ["uca", "tup", "utnMec", "ips"],
+      "coursework": "all",
+      "skillOrder": ["cad", "manufacturing", "programming", "data", "office"]
     }
   },
 
   "experience": [],
+  "projects": [],
 
   "education": {
     "uca": {
-      "institution": { "es": "Pontificia Universidad Católica Argentina (UCA)", "en": "Pontifical Catholic University of Argentina (UCA)" },
+      "institution": { "es": "Pontificia Universidad Católica Argentina", "en": "Pontifical Catholic University of Argentina" },
       "location": { "es": "Rosario, Argentina", "en": "Rosario, Argentina" },
       "degree": { "es": "Ingeniería Industrial", "en": "Industrial Engineering" },
       "start": "2026",
       "end": null,
-      "progress": { "approved": 10, "total": 63 },
+      "progress": { "approved": 9, "total": 62 },
       "gpa": null,
       "detail": null,
       "coursework": {
-        "ing": { "es": ["Probabilidad y Estadística", "Física I", "Álgebra y Geometría"], "en": ["Probability and Statistics", "Physics I", "Algebra and Geometry"] },
+        "ing": { "es": ["Probabilidad y Estadística", "Álgebra y Geometría"], "en": ["Probability and Statistics", "Algebra and Geometry"] },
         "dev": { "es": ["Probabilidad y Estadística"], "en": ["Probability and Statistics"] }
       }
     },
     "tup": {
-      "institution": { "es": "Universidad Tecnológica Nacional (UTN)", "en": "National Technological University (UTN)" },
+      "institution": { "es": "Universidad Tecnológica Nacional", "en": "National Technological University" },
       "location": { "es": "Rosario, Argentina", "en": "Rosario, Argentina" },
       "degree": { "es": "Tecnicatura Universitaria en Programación (plan 2024)", "en": "University Technical Degree in Programming (2024 curriculum)" },
       "start": "2024",
@@ -56,7 +76,7 @@
       }
     },
     "utnMec": {
-      "institution": { "es": "Universidad Tecnológica Nacional (UTN)", "en": "National Technological University (UTN)" },
+      "institution": { "es": "Universidad Tecnológica Nacional", "en": "National Technological University" },
       "location": { "es": "Rosario, Argentina", "en": "Rosario, Argentina" },
       "degree": { "es": "Ingeniería Mecánica (estudios previos)", "en": "Mechanical Engineering (previous studies)" },
       "start": "2024",
@@ -70,14 +90,14 @@
       }
     },
     "ips": {
-      "institution": { "es": "Instituto Politécnico Superior \"General San Martín\" (UNR)", "en": "Instituto Politécnico Superior \"General San Martín\" (National University of Rosario)" },
+      "institution": { "es": "Instituto Politécnico Superior \"General San Martín\"", "en": "Instituto Politécnico Superior \"General San Martín\"" },
       "location": { "es": "Rosario, Argentina", "en": "Rosario, Argentina" },
       "degree": { "es": "Técnico Mecánico", "en": "Mechanical Technician" },
       "start": "2015",
       "end": "2021",
       "progress": null,
       "gpa": 7.52,
-      "detail": null,
+      "detail": { "es": "Escuela técnica de la Universidad Nacional de Rosario.", "en": "Technical school of the National University of Rosario." },
       "coursework": {
         "ing": { "es": ["Elementos de Máquinas", "Máquinas Hidráulicas", "Procesos de Mecanizado", "Sólidos Paramétricos"], "en": ["Machine Elements", "Hydraulic Machines", "Machining Processes", "Parametric Solid Modeling"] },
         "dev": { "es": ["Sólidos Paramétricos"], "en": ["Parametric Solid Modeling"] }
@@ -88,106 +108,112 @@
   "skills": {
     "cad": {
       "label": { "es": "CAD/CAM", "en": "CAD/CAM" },
-      "items": [
-        { "name": "SolidWorks 3D", "level": "intermediate" },
-        { "name": "SolidWorks CAM", "level": "intermediate" },
-        { "name": "Solid Edge Community", "level": "intermediate" },
-        { "name": "Autodesk Inventor", "level": "intermediate" },
-        { "name": "Autodesk Fusion", "level": "intermediate" },
-        { "name": "AutoCAD 2D", "level": "intermediate" },
-        { "name": "FluidSIM", "level": "intermediate" }
-      ]
+      "items": ["SolidWorks 3D", "SolidWorks CAM", "Solid Edge Community", "Autodesk Inventor", "Autodesk Fusion", "AutoCAD 2D", "FluidSIM"]
     },
     "manufacturing": {
       "label": { "es": "Fabricación", "en": "Manufacturing" },
       "items": [
-        { "name": { "es": "CNC / código G", "en": "CNC / G-code" }, "level": "intermediate" },
-        { "name": { "es": "mecanizado manual (torno, fresa, soldadura)", "en": "manual machining (lathe, milling, welding)" }, "level": "intermediate" },
-        { "name": "Mach4", "level": "basic" }
+        { "es": "CNC / código G", "en": "CNC / G-code" },
+        { "es": "mecanizado manual (torno, fresadora, soldadura)", "en": "manual machining (lathe, milling, welding)" },
+        "Mach4"
       ]
     },
     "programming": {
       "label": { "es": "Programación", "en": "Programming" },
       "items": [
-        { "name": "Python", "level": "intermediate" },
-        { "name": "JavaScript", "level": "intermediate" },
-        { "name": "HTML/CSS", "level": "intermediate" },
-        { "name": "Git/GitHub", "level": "intermediate" },
-        { "name": "Linux/Bash", "level": "intermediate" },
-        { "name": "C/C++", "level": "basic" },
-        { "name": "Node.js", "level": "basic" },
-        { "name": "Next.js", "level": "basic" },
-        { "name": "Tailwind CSS", "level": "basic" },
-        { "name": "GitHub Actions", "level": "basic" },
-        { "name": "Docker", "level": "basic" },
-        { "name": "WSL", "level": "basic" },
-        { "name": "Arduino", "level": "basic" },
-        { "name": { "es": "desarrollo asistido por IA (Claude Code)", "en": "AI-assisted development (Claude Code)" }, "level": null }
+        "Python", "JavaScript", "HTML/CSS", "Git/GitHub", "Linux/Bash", "C/C++", "Node.js", "Next.js",
+        "Tailwind CSS", "GitHub Actions", "Docker", "WSL", "Arduino",
+        { "es": "desarrollo asistido por IA (Claude Code)", "en": "AI-assisted development (Claude Code)" }
       ]
     },
     "data": {
-      "label": { "es": "Datos y cálculo", "en": "Data and computing" },
-      "items": [
-        { "name": "MySQL", "level": "basic" },
-        { "name": "PostgreSQL", "level": "basic" },
-        { "name": "MATLAB/Octave", "level": "basic" }
-      ]
+      "label": { "es": "Datos y cálculo", "en": "Data and Computing" },
+      "items": ["MySQL", "PostgreSQL", "MATLAB/Octave"]
     },
     "office": {
-      "label": { "es": "Ofimática y gestión", "en": "Office and management" },
+      "label": { "es": "Ofimática y gestión", "en": "Office and Management" },
       "items": [
-        { "name": "Office / Google Workspace", "level": "advanced" },
-        { "name": "Excel", "level": "intermediate" },
-        { "name": { "es": "modelado de procesos BPM (draw.io)", "en": "BPM process modeling (draw.io)" }, "level": "basic" }
+        "Microsoft Office", "Google Workspace", "Excel",
+        { "es": "modelado de procesos BPM (draw.io)", "en": "BPM process modeling (draw.io)" }
       ]
     }
   },
 
-  "languages": {
-    "es": "español (nativo); inglés (B2, Cambridge First Certificate, 2024); italiano (básico); portugués (básico)",
-    "en": "Spanish (native); English (B2, Cambridge First Certificate, 2024); Italian (basic); Portuguese (basic)"
-  },
+  "languages": [
+    { "name": { "es": "Español", "en": "Spanish" }, "level": { "es": "nativo", "en": "native" } },
+    { "name": { "es": "Inglés", "en": "English" }, "level": { "es": "B2, Cambridge First Certificate, 2024", "en": "B2, Cambridge First Certificate, 2024" } },
+    { "name": { "es": "Italiano", "en": "Italian" }, "level": { "es": "básico", "en": "basic" } },
+    { "name": { "es": "Portugués", "en": "Portuguese" }, "level": { "es": "básico", "en": "basic" } }
+  ],
 
   "interests": {
-    "es": "diseño de ingeniería, investigación y desarrollo, operaciones, planeamiento, sistemas",
-    "en": "engineering design, research and development, operations, planning, systems"
+    "es": ["diseño de ingeniería", "investigación y desarrollo", "operaciones", "planeamiento", "sistemas"],
+    "en": ["engineering design", "research and development", "operations", "planning", "systems"]
   },
 
   "labels": {
     "es": {
-      "education": "Formación",
-      "experience": "Experiencia",
-      "skills": "Habilidades e intereses",
-      "languages": "Idiomas",
-      "interests": "Intereses",
+      "kind": { "resume": "CV", "cv": "CV académico" },
+      "headings": {
+        "resume": {
+          "education": "Educación",
+          "experience": "Experiencia",
+          "projects": "Proyectos",
+          "skills": "Habilidades técnicas e idiomas"
+        },
+        "cv": {
+          "education": "Formación",
+          "interests": "Áreas de interés",
+          "experience": "Experiencia",
+          "projects": "Proyectos",
+          "skills": "Habilidades técnicas",
+          "languages": "Idiomas"
+        }
+      },
+      "variant": { "ing": "", "dev": " (Desarrollo)", "cv": "" },
       "present": "actualidad",
-      "progress": "{approved} de {total} materias aprobadas.",
-      "gpa": "Promedio: {gpa}/10.",
+      "progress": "{approved} de {total} materias aprobadas",
+      "gpa": "Promedio: {gpa}/10",
       "coursework": "Materias relevantes",
-      "levels": { "advanced": "dominio de", "intermediate": "manejo intermedio de", "basic": "conocimientos básicos de" },
-      "downloadPdf": "Descargar PDF",
+      "courseworkAll": "Materias",
+      "languages": "Idiomas",
+      "pdfA4": "PDF (A4)",
+      "pdfLetter": "PDF (Carta)",
       "otherLang": "English",
       "controls": "Idioma y descarga",
       "updated": "Actualizado",
-      "titleSuffix": { "ing": "", "dev": " (Desarrollo)" },
       "months": ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"]
     },
     "en": {
-      "education": "Education",
-      "experience": "Experience",
-      "skills": "Skills & Interests",
-      "languages": "Languages",
-      "interests": "Interests",
+      "kind": { "resume": "Resume", "cv": "Curriculum Vitae" },
+      "headings": {
+        "resume": {
+          "education": "Education",
+          "experience": "Experience",
+          "projects": "Projects",
+          "skills": "Technical Skills & Languages"
+        },
+        "cv": {
+          "education": "Education",
+          "interests": "Areas of Interest",
+          "experience": "Experience",
+          "projects": "Projects",
+          "skills": "Technical Skills",
+          "languages": "Languages"
+        }
+      },
+      "variant": { "ing": "", "dev": " (Software)", "cv": "" },
       "present": "present",
-      "progress": "{approved} of {total} courses passed.",
-      "gpa": "GPA: {gpa}/10.",
+      "progress": "{approved} of {total} courses passed",
+      "gpa": "GPA: {gpa}/10",
       "coursework": "Relevant coursework",
-      "levels": { "advanced": "advanced proficiency in", "intermediate": "proficient in", "basic": "familiar with" },
-      "downloadPdf": "Download PDF",
+      "courseworkAll": "Coursework",
+      "languages": "Languages",
+      "pdfA4": "PDF (A4)",
+      "pdfLetter": "PDF (Letter)",
       "otherLang": "Español",
       "controls": "Language and download",
       "updated": "Updated",
-      "titleSuffix": { "ing": "", "dev": " (Software)" },
       "months": ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
     }
   }

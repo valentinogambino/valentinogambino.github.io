@@ -1,6 +1,6 @@
 // Guardia de datos sensibles. Busca PATRONES genéricos, nunca valores literales:
 // este archivo es público, así que no puede contener lo que intenta proteger.
-//   node scripts/check-sensible.mjs            revisa docs/ y data/
+//   node scripts/check-sensible.mjs            revisa docs/, local/ y data/
 //   node scripts/check-sensible.mjs --staged   revisa lo que está en el índice de git (hook pre-commit)
 import { readFileSync, readdirSync, statSync, existsSync } from 'node:fs';
 import { join, relative, extname, resolve } from 'node:path';
@@ -33,7 +33,7 @@ function walk(dir) {
 }
 
 function scan(rel, text) {
-  const publishable = /^(docs|data)\//.test(rel);
+  const publishable = /^(docs|local|data)\//.test(rel);
   const patterns = publishable ? [...NUMBER_PATTERNS, ...WORD_PATTERNS] : NUMBER_PATTERNS;
   return patterns.filter(([, re]) => re.test(text)).map(([label]) => `${rel}: ${label}`);
 }
@@ -46,7 +46,7 @@ export function checkSensible({ staged = false } = {}) {
       .split('\n').filter(Boolean);
     for (const f of files) if (f.startsWith('fuentes/')) problems.push(`${f}: archivo de fuentes/ en el commit`);
   } else {
-    files = [...walk(join(ROOT, 'docs')), ...walk(join(ROOT, 'data'))].map((p) => relative(ROOT, p).replaceAll('\\', '/'));
+    files = ['docs', 'local', 'data'].flatMap((d) => walk(join(ROOT, d))).map((p) => relative(ROOT, p).replaceAll('\\', '/'));
   }
   for (const rel of files) {
     if (rel === SELF || !TEXT_EXT.has(extname(rel))) continue;

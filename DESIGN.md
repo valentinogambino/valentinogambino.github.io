@@ -1,155 +1,93 @@
 ---
-name: CV Valentino Gambino
-description: CV en formato MIT (CAPD), apto para ATS, en web y PDF A4 de una página.
+name: Documentos de carrera de Valentino Gambino
+description: Resume y CV según MIT CAPD, aptos para ATS, en web y PDF A4 y Carta.
 colors:
   ink: "#111111"
-  ink-soft: "#444444"
-  rule: "#111111"
+  ink-soft: "#555555"
   paper: "#ffffff"
-  selection: "#e4e4e4"
+  surround: "#ececec"
+  selection: "#dcdcdc"
 typography:
   display:
-    fontFamily: "Tinos, Times New Roman, Times, serif"
-    fontSize: "1.7rem"
+    fontFamily: "Calibri, Carlito, sans-serif"
+    fontSize: "16pt"
     fontWeight: 700
-    lineHeight: 1.1
-    letterSpacing: "0.02em"
-    fontFeature: "smcp"
+    lineHeight: 1.15
   headline:
-    fontFamily: "Tinos, Times New Roman, Times, serif"
-    fontSize: "1rem"
+    fontFamily: "Calibri, Carlito, sans-serif"
+    fontSize: "11pt"
     fontWeight: 700
   body:
-    fontFamily: "Tinos, Times New Roman, Times, serif"
-    fontSize: "1rem"
+    fontFamily: "Calibri, Carlito, sans-serif"
+    fontSize: "11pt"
     fontWeight: 400
-    lineHeight: 1.38
-  label:
-    fontFamily: "Tinos, Times New Roman, Times, serif"
-    fontSize: "0.9375rem"
-    fontWeight: 400
+    lineHeight: 1.25
 rounded:
   none: "0"
 spacing:
-  entry: "0.7rem"
-  section: "1rem"
-  label-column: "7.25rem"
-  column-gap: "1.25rem"
+  page-margin: "0.75in"
+  section: "9pt"
+  entry: "5pt"
+  cv-label-column: "1.35in"
 components:
   text-link:
     textColor: "{colors.ink}"
 ---
 
-# Design System: CV Valentino Gambino
+# Sistema visual
 
-## Overview
+Todo sale de `GUIA.md`; este archivo documenta cómo se aplicó. Si algo de
+acá contradice la guía, gana la guía.
 
-**Creative North Star: "El CV de MIT"**
+## Principio
 
-El CV sigue el formato que recomienda MIT Career Advising & Professional
-Development (CAPD) y sus CV de ejemplo:
+Los documentos son los de MIT CAPD, sin interpretación propia: Calibri de 11pt,
+negro sobre blanco, sin color, íconos, gráficos ni subrayado. La web muestra la
+misma hoja que el PDF, sobre un fondo gris, con tres links arriba (idioma, PDF
+A4, PDF Carta) y la fecha de actualización abajo. Ni los links ni la fecha
+salen en el PDF.
 
-- serif conservadora entre 10 y 12pt;
-- márgenes uniformes;
-- una página;
-- negrita solo en datos clave;
-- títulos de sección en una columna angosta a la izquierda;
-- institución y lugar en una línea, título y fechas en la siguiente.
+## Resume (sample MIT 2025 "UG Resume with Projects")
 
-No hay color ni ornamentos: la autoridad sale de lo convencional. Todo el
-texto es real y está en el orden de lectura, así que un ATS lo lee tal
-cual.
+- Nombre centrado en negrita, de 16pt. Debajo, una línea centrada: ciudad ·
+  email · LinkedIn (si existe).
+- Títulos de sección a todo el ancho, en mayúsculas y negrita, con una regla de
+  1px debajo. Sin columnas: es la regla de ATS de MIT.
+- Entrada: "**Institución** | Lugar" con la fecha en cursiva a la derecha;
+  debajo, el título en cursiva; después, avance, detalle y promedio en una
+  línea, y "**Materias relevantes:** …".
+- Habilidades: una línea por categoría, "**Categoría:** a, b, c", con sangría
+  francesa. La última línea es "**Idiomas:**", con el nivel entre paréntesis.
+- Orden de secciones: Educación, Experiencia, Proyectos, Habilidades técnicas
+  e idiomas. Las vacías no aparecen.
 
-**Key Characteristics:**
-- Nombre centrado en versalitas, línea de contacto centrada y una regla negra debajo.
-- Etiquetas de sección a la izquierda, contenido a la derecha; en móvil la etiqueta pasa arriba.
-- Institución en negrita y título en cursiva; lugar y fechas alineados a la derecha.
-- Habilidades en una línea por categoría, con niveles escritos al estilo MIT ("proficient in…; familiar with…").
-- La impresión A4 es la misma página, en 11pt y con márgenes de 19mm.
+## CV (Sample CVs del Career Handbook)
 
-## Colors
+- Mismo encabezado que el resume.
+- Etiqueta de sección en negrita en una columna de 1.35in a la izquierda; el
+  contenido a la derecha. En móvil la etiqueta pasa arriba.
+- Entrada: institución en negrita con el lugar a la derecha; título en cursiva
+  con la fecha a la derecha.
+- Impresión: número de página "1/N" abajo en la primera hoja; desde la
+  segunda, nombre arriba a la izquierda y "n/N" arriba a la derecha.
 
-Tinta negra sobre papel blanco, sin acento.
+## Medidas
 
-### Neutral
-- **Tinta** (ink): todo el texto y las reglas.
-- **Tinta suave** (ink-soft): solo la fecha de actualización y, en móvil, el lugar y las fechas.
-- **Papel** (paper): el fondo, tanto en pantalla como impreso.
-- **Selección** (selection): gris claro para el texto seleccionado.
+- Cuerpo 11pt en pantalla y en PDF. MIT pide entre 10 y 12pt: nunca bajar
+  de 10.
+- Márgenes de 0.75in en A4 y en Carta (MIT: entre 0.5 y 1in).
+- La fecha a la derecha nunca se corta ni baja de línea; si el texto de la
+  izquierda es largo, se corta él. Si eso hace que la prueba ATS falle, se
+  acorta el texto.
+- Por debajo de 40rem la hoja pierde la sombra y usa 16px de margen lateral
+  con `env(safe-area-inset-*)`. Tiene que entrar a 402px sin scroll
+  horizontal.
 
-**The No Color Rule.** MIT recomienda un CV conservador: nada de color, ni
-siquiera en los links, que van en tinta y subrayados.
+## No hacer
 
-## Typography
-
-**Body Font:** Tinos (métricamente compatible con Times New Roman), con Times New Roman de respaldo.
-
-**Character:** Es la serif de documento formal por excelencia. Un solo tipo
-para todo; la jerarquía sale de la negrita, la cursiva y las versalitas.
-
-### Hierarchy
-- **Display** (700, 1.7rem, versalitas): solo el nombre.
-- **Headline** (700, 1rem): etiquetas de sección ("Formación", "Habilidades e intereses").
-- **Body** (400, 1rem, 1.38): todo el contenido. En el PDF, 11pt.
-- **Label** (400, 0.9375rem): la línea de contacto.
-
-**The Bold Sparingly Rule.** La negrita queda reservada para el nombre, las
-etiquetas de sección, las instituciones y los rótulos de línea
-("CAD/CAM:", "Materias relevantes:"). Esa es la regla textual de MIT.
-
-## Layout
-
-Una columna de 50rem centrada. Cada sección es una grilla con la etiqueta en
-7.25rem y el contenido al lado, con 1.25rem de separación. Cada entrada es
-una grilla de dos columnas: a la izquierda, institución y título; a la
-derecha, lugar y fechas. Las líneas de detalle ocupan el ancho completo.
-Las líneas de habilidades usan sangría francesa de 1em.
-
-Por debajo de 40rem, la etiqueta pasa arriba con una regla; el lugar y las
-fechas bajan en gris, en este orden: institución, lugar, título, fechas,
-detalle. La línea de contacto se apila. No hay scroll horizontal a 360 ni a
-402px, y los bordes usan `env(safe-area-inset-*)`.
-
-**The One Page Rule.** Los 4 PDF tienen que entrar en una página A4. Si el
-contenido crece, primero se ajusta el espaciado de impresión. El tamaño de
-letra nunca baja de 10pt (mínimo de MIT).
-
-## Elevation & Depth
-
-Plana. No hay sombras ni fondos: solo una regla negra de 1px bajo el
-encabezado y, en móvil, bajo cada etiqueta.
-
-## Shapes
-
-Sin formas: no hay cajas, tarjetas ni bordes redondeados. Es tipografía
-sobre papel.
-
-## Components
-
-### Encabezado
-El nombre va centrado en versalitas negrita. Debajo, una línea centrada con
-ciudad • email • LinkedIn (si existe), y luego la regla negra a ancho
-completo.
-
-### Entrada (formación / experiencia)
-Primera línea: institución en negrita, con el lugar a la derecha. Segunda
-línea: título en cursiva, con las fechas a la derecha. Después, el avance,
-la nota y el promedio en una línea, y "Materias relevantes:" con el rótulo
-en negrita.
-
-### Links y controles
-En tinta, subrayados con 1px y offset de 0.18em; al pasar el mouse, 2px.
-El foco es un outline negro de 2px. Los controles "English · Descargar PDF"
-van arriba a la derecha y se ocultan al imprimir.
-
-## Do's and Don'ts
-
-### Do:
-- **Do** mantener una serif conservadora entre 10 y 12pt en el PDF (11pt hoy).
-- **Do** listar la formación en orden cronológico inverso, con una línea de "Materias relevantes" por carrera.
-- **Do** escribir los niveles con la redacción MIT: "manejo intermedio de…; conocimientos básicos de…" / "proficient in…; familiar with…".
-
-### Don't:
-- **Don't** agregar color, íconos, barras de nivel, foto ni una barra lateral.
-- **Don't** incluir datos personales (edad, documento, estado civil) ni "referencias a pedido". Es regla de MIT y de este proyecto.
-- **Don't** usar negrita fuera de los casos de la regla de arriba.
+- Color, íconos, barras de nivel, foto, tablas o columnas en el resume.
+- Negrita fuera del nombre, los títulos, las instituciones y los rótulos de
+  línea.
+- Subrayado dentro del documento (los links lo muestran solo al pasar el
+  mouse).
+- Corte de palabras con guion (`hyphens: manual`).
