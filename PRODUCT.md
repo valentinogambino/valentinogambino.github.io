@@ -1,79 +1,64 @@
 # Product
 
-<!-- impeccable:product-schema 1 -->
-
 ## Platform
 
-web
+web + PDF
 
 ## Stack
 
-Static HTML + CSS, no framework and no client-side JS. A dependency-free Node 24
-script (`build.mjs`) renders `data/cv.json` into `docs/`; PDFs are printed
-locally with Edge headless. Hosted on GitHub Pages (`main` + `/docs`) at
-`valentinogambino.github.io/cv`. Astro and Next.js were considered and rejected.
+HTML y CSS estáticos, sin framework y sin JS en la página. `build.mjs` (Node 24,
+sin dependencias) convierte `data/cv.json` en `docs/` (público, GitHub Pages en
+`valentinogambino.github.io/cv`) y `local/` (privado). Los PDF los imprime Edge
+headless en A4 y en Carta; la prueba ATS usa `pdftotext`.
 
 ## Users
 
-- Recruiters and HR screeners at industrial and technology companies in Argentina
-  (e.g. Techint) who open a shared link or download the PDF, scanning for
-  degree, progress, tools and languages in under a minute.
-- Applicant tracking systems that parse the PDF.
-- The owner, Valentino Gambino, who updates it every six months.
+- Reclutadores y RR. HH. de empresas industriales y de tecnología en Argentina
+  (ej. Techint): abren un link o bajan el PDF y buscan en menos de un minuto
+  carrera, avance, materias, herramientas e idiomas.
+- Sistemas ATS que leen el PDF.
+- Más adelante, lectores académicos (ayudantías, becas, intercambio, posgrado),
+  con el CV.
+- El dueño, que actualiza todo cada seis meses.
 
 ## Product Purpose
 
-A personal CV in Spanish and English, in the MIT CAPD résumé format, in two
-targeted variants from one data file: **Ingeniería** (main, at `/cv/`) and
-**Desarrollo** (shared by link at `/cv/dev/`; programming skills and coursework
-first). Success: a reader immediately sees degrees, progress, relevant
-coursework, tools and languages; the PDF parses cleanly; a semester update means
-editing one JSON file plus running one command.
+Documentos de carrera según las guías de MIT CAPD (`GUIA.md`): un resume de una
+página, orientado por tipo de puesto (Ingeniería y Desarrollo), y un CV
+académico maestro, en español e inglés, desde un solo archivo de datos.
+
+Éxito:
+- el lector ve enseguida qué estudia, cuánto avanzó y qué herramientas usa;
+- el PDF pasa la prueba ATS;
+- actualizar es editar un JSON y correr un comando.
 
 ## Positioning
 
-A mechanical technician studying industrial engineering and programming at the
-same time: hands-on manufacturing (CAD/CAM, CNC, machining) plus real software
-skills. Neither a pure engineering nor a pure developer CV.
-
-## Capabilities and Constraints
-
-- Follows MIT CAPD guidance: conservative serif 10–12pt, uniform margins, one
-  page, bold sparingly, no photo or personal data. No summary/profile.
-- Sections: Education (reverse chronological, with progress, GPA where it
-  exists and a "relevant coursework" line), Experience (hidden while empty),
-  Skills & Interests (one line per category, MIT wording; languages incl.
-  Cambridge FCE B2; interests). No projects section for now.
-- Single reading order, selectable text, no icons, no skill bars (ATS-safe).
-- Must work at 402px CSS width without horizontal scroll; print to A4 in one
-  page, controls hidden in print.
-- Language switch and PDF download are plain links.
-- Indexable by search engines.
-
-## Brand Commitments
-
-None beyond the name "Valentino Gambino".
+Técnico mecánico que estudia en paralelo Ingeniería Industrial y la Tecnicatura
+en Programación: fabricación (CAD/CAM, CNC, mecanizado) y software real. La
+versión Ingeniería y la de Desarrollo cambian qué materias y habilidades
+aparecen primero.
 
 ## Evidence on Hand
 
-All content lives in `data/cv.json`, sourced from documents in `fuentes/`
-(gitignored): IPS analítico, UCA plan with equivalencias, TUP estado
-académico, UTN Ingeniería Mecánica preanalítico (2024–2025, 7 courses, GPA
-7.86), Cambridge FCE statement of results (B2, Dec 2024), Techint profile
-capture. No work experience, testimonials, projects or other certifications or
-photo exist; do not fabricate any.
+Todo el contenido de `data/cv.json` sale de `fuentes/` (gitignored): analítico
+del IPS, plan de la UCA con equivalencias, estado académico de la TUP,
+preanalítico de UTN Ingeniería Mecánica, Statement of Results del FCE y la
+captura del perfil de Techint. No hay experiencia laboral, proyectos
+documentados, premios ni otras certificaciones: no se inventan.
 
 ## Product Principles
 
-1. Truth over polish: every claim traces to a source document or an explicit
-   confirmation from the owner.
-2. Machine-readable first: what an ATS reads must equal what a human sees.
-3. Maintenance in minutes: content changes never require touching markup or
-   styles.
-4. Public by design, private by default: only name, email, city, LinkedIn,
-   studies and skills are ever published.
+1. Las reglas de MIT antes que el gusto propio; cuando MIT se contradice,
+   decide `GUIA.md` §0.
+2. Verdad antes que pulido: cada dato sale de un documento o de una
+   confirmación del dueño.
+3. Lo que lee el ATS es lo que ve la persona, y una prueba lo verifica en cada
+   build.
+4. Público por diseño, privado por defecto: solo nombre, email, ciudad,
+   LinkedIn, estudios, habilidades e idiomas.
 
 ## Accessibility & Inclusion
 
-Semantic HTML with a sensible heading order, sufficient contrast, readable on
-phones, and printable.
+HTML semántico con jerarquía de títulos correcta, contraste alto, legible en
+celulares (402px sin scroll horizontal) e imprimible.
