@@ -78,7 +78,8 @@ Sin `npm install`: Node 24 con módulos nativos. La prueba ATS usa `pdftotext`
   - analítico del IPS (Técnico Mecánico, 2015–2021);
   - `Plan de estudios II 2018 - GAMBINO.xlsx`: plan de Ingeniería Industrial
     de la UCA, con las equivalencias de la carrera anterior;
-  - estado académico de la TUP;
+  - estado académico de la TUP (`PLAN DE ESTUDIO TUP.jpeg`, al 7/9/2026:
+    8 de 18 materias, incluido el Trabajo Final Integrador);
   - `PREANALITICO UTN/`: preanalítico de Ingeniería Mecánica en UTN FRRo,
     54 páginas (folio 4: materias rendidas y promedio);
   - `FCE/`: Statement of Results del Cambridge First Certificate;
@@ -143,8 +144,8 @@ Sin `npm install`: Node 24 con módulos nativos. La prueba ATS usa `pdftotext`
   - UCA: fecha de inicio 01/03/2024 → 2026; materias aprobadas 21 → 9;
     materias totales 63 → 62. Fecha estimada de graduación 03/2030 y fin de
     cursada 12/2029: el CV dice egreso previsto 2029, alinear.
-  - TUP: fecha de inicio 01/03/2022 → 2024. Materias: Techint dice 9 de 19
-    y el CV 8 de 18; falta confirmar cuál es el dato correcto.
+  - TUP: fecha de inicio 01/03/2022 → 2024; materias aprobadas 9 → 8;
+    materias totales 19 → 18.
   - Sumar Ingeniería Mecánica UTN FRRo (2024–2025, 7 materias, promedio
     7,86/10), que no figura.
   - Inglés: "Avanzado" → el nivel que corresponda a B2 (FCE, dic. 2024).
