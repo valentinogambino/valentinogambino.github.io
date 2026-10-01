@@ -199,6 +199,19 @@ Se usan cuando se incorporen; ver Pendientes en `CLAUDE.md`.
 - **Fechas:** mientras no haya fecha de egreso esperado documentada, se usa
   "año de inicio – actualidad".
 - **Sin JS** en las páginas; la web muestra el mismo documento que el PDF.
+- **Avance de carrera ("9 de 62 materias"):** solo en el CV académico. En los
+  resumes no va: pone el foco en lo que falta, y MIT pide la fecha de egreso
+  esperado, que la reemplaza cuando exista.
+- **Ingeniería Mecánica UTN en los resumes:** fundida en la entrada de la UCA
+  ("Incluye estudios previos…"), para que se lea como transferencia y no como
+  abandono. En el CV académico, entrada propia.
+- **Orden de formación por documento:** cada resume pone primero el título
+  relevante para el puesto (Desarrollo: TUP primero), aunque no sea el más
+  reciente ("sections listed in order of importance to the employer").
+- **Materias relevantes:** pocas y sin repetir la misma materia en dos
+  entradas del mismo resume.
+- **CV académico:** sin "Áreas de interés" hasta tener intereses de
+  investigación concretos; el FCE va también en Certificaciones.
 
 ## 9. Contradicciones resueltas
 

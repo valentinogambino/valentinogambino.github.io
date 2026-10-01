@@ -15,7 +15,9 @@
       "index": true,
       "file": { "es": "cv-valentino-gambino", "en": "resume-valentino-gambino" },
       "sections": ["education", "experience", "projects", "skills"],
-      "educationOrder": ["uca", "tup", "utnMec", "ips"],
+      "educationOrder": ["uca", "tup", "ips"],
+      "educationMerge": { "utnMec": "uca" },
+      "progress": false,
       "coursework": "ing",
       "skillOrder": ["cad", "manufacturing", "programming", "data", "office"]
     },
@@ -26,7 +28,9 @@
       "index": false,
       "file": { "es": "cv-valentino-gambino-dev", "en": "resume-valentino-gambino-dev" },
       "sections": ["education", "experience", "projects", "skills"],
-      "educationOrder": ["uca", "tup", "utnMec", "ips"],
+      "educationOrder": ["tup", "uca", "ips"],
+      "educationMerge": { "utnMec": "uca" },
+      "progress": false,
       "coursework": "dev",
       "skillOrder": ["programming", "data", "office", "cad", "manufacturing"]
     },
@@ -36,8 +40,9 @@
       "publish": false,
       "index": false,
       "file": { "es": "cv-academico-valentino-gambino", "en": "cv-valentino-gambino-academic" },
-      "sections": ["education", "interests", "experience", "projects", "skills", "languages"],
+      "sections": ["education", "experience", "projects", "skills", "languages", "certifications"],
       "educationOrder": ["uca", "tup", "utnMec", "ips"],
+      "progress": true,
       "coursework": "all",
       "skillOrder": ["cad", "manufacturing", "programming", "data", "office"]
     }
@@ -57,12 +62,12 @@
       "gpa": null,
       "detail": null,
       "coursework": {
-        "ing": { "es": ["Probabilidad y Estadística", "Álgebra y Geometría"], "en": ["Probability and Statistics", "Algebra and Geometry"] },
-        "dev": { "es": ["Probabilidad y Estadística"], "en": ["Probability and Statistics"] }
+        "ing": { "es": ["Representación Gráfica", "Física I", "Probabilidad y Estadística"], "en": ["Engineering Graphics", "Physics I", "Probability and Statistics"] },
+        "dev": { "es": [], "en": [] }
       }
     },
     "tup": {
-      "institution": { "es": "Universidad Tecnológica Nacional", "en": "National Technological University" },
+      "institution": { "es": "Universidad Tecnológica Nacional, Facultad Regional Rosario", "en": "National Technological University, Rosario Regional Faculty" },
       "location": { "es": "Rosario, Argentina", "en": "Rosario, Argentina" },
       "degree": { "es": "Tecnicatura Universitaria en Programación (plan 2024)", "en": "University Technical Degree in Programming (2024 curriculum)" },
       "start": "2024",
@@ -71,12 +76,12 @@
       "gpa": 7.13,
       "detail": null,
       "coursework": {
-        "ing": { "es": ["Programación I y II", "Probabilidad y Estadística"], "en": ["Programming I and II", "Probability and Statistics"] },
+        "ing": { "es": ["Programación I y II"], "en": ["Programming I and II"] },
         "dev": { "es": ["Programación I y II", "Arquitectura y Sistemas Operativos", "Probabilidad y Estadística"], "en": ["Programming I and II", "Computer Architecture and Operating Systems", "Probability and Statistics"] }
       }
     },
     "utnMec": {
-      "institution": { "es": "Universidad Tecnológica Nacional", "en": "National Technological University" },
+      "institution": { "es": "Universidad Tecnológica Nacional, Facultad Regional Rosario", "en": "National Technological University, Rosario Regional Faculty" },
       "location": { "es": "Rosario, Argentina", "en": "Rosario, Argentina" },
       "degree": { "es": "Ingeniería Mecánica (estudios previos)", "en": "Mechanical Engineering (previous studies)" },
       "start": "2024",
@@ -84,6 +89,10 @@
       "progress": null,
       "gpa": 7.86,
       "detail": { "es": "7 materias aprobadas, acreditadas por equivalencia en Ingeniería Industrial.", "en": "7 courses passed, credited toward Industrial Engineering." },
+      "mergedNote": {
+        "es": "Incluye estudios previos de Ingeniería Mecánica (Universidad Tecnológica Nacional, 2024–2025): 7 materias aprobadas, acreditadas por equivalencia, promedio 7,86/10.",
+        "en": "Includes previous Mechanical Engineering studies (National Technological University, 2024–2025): 7 courses passed and credited, GPA 7.86/10."
+      },
       "coursework": {
         "ing": { "es": ["Ingeniería Mecánica I", "Física I", "Análisis Matemático I"], "en": ["Mechanical Engineering I", "Physics I", "Calculus I"] },
         "dev": { "es": [], "en": [] }
@@ -100,7 +109,7 @@
       "detail": { "es": "Escuela técnica de la Universidad Nacional de Rosario.", "en": "Technical school of the National University of Rosario." },
       "coursework": {
         "ing": { "es": ["Elementos de Máquinas", "Máquinas Hidráulicas", "Procesos de Mecanizado", "Sólidos Paramétricos"], "en": ["Machine Elements", "Hydraulic Machines", "Machining Processes", "Parametric Solid Modeling"] },
-        "dev": { "es": ["Sólidos Paramétricos"], "en": ["Parametric Solid Modeling"] }
+        "dev": { "es": [], "en": [] }
       }
     }
   },
@@ -108,7 +117,7 @@
   "skills": {
     "cad": {
       "label": { "es": "CAD/CAM", "en": "CAD/CAM" },
-      "items": ["SolidWorks 3D", "SolidWorks CAM", "Solid Edge Community", "Autodesk Inventor", "Autodesk Fusion", "AutoCAD 2D", "FluidSIM"]
+      "items": ["SolidWorks 3D", "SolidWorks CAM", "Solid Edge", "Autodesk Inventor", "Autodesk Fusion", "AutoCAD 2D", "FluidSIM"]
     },
     "manufacturing": {
       "label": { "es": "Fabricación", "en": "Manufacturing" },
@@ -122,8 +131,8 @@
       "label": { "es": "Programación", "en": "Programming" },
       "items": [
         "Python", "JavaScript", "HTML/CSS", "Git/GitHub", "Linux/Bash", "C/C++", "Node.js", "Next.js",
-        "Tailwind CSS", "GitHub Actions", "Docker", "WSL", "Arduino",
-        { "es": "desarrollo asistido por IA (Claude Code)", "en": "AI-assisted development (Claude Code)" }
+        "Tailwind CSS", "GitHub Actions", "Docker", "Arduino",
+        { "es": "desarrollo asistido por IA (Claude Code)", "en": "AI-assisted development (Claude Code)", "only": ["dev"] }
       ]
     },
     "data": {
@@ -133,7 +142,7 @@
     "office": {
       "label": { "es": "Ofimática y gestión", "en": "Office and Management" },
       "items": [
-        "Microsoft Office", "Google Workspace", "Excel",
+        "Microsoft Office", "Google Workspace",
         { "es": "modelado de procesos BPM (draw.io)", "en": "BPM process modeling (draw.io)" }
       ]
     }
@@ -146,10 +155,13 @@
     { "name": { "es": "Portugués", "en": "Portuguese" }, "level": { "es": "básico", "en": "basic" } }
   ],
 
-  "interests": {
-    "es": ["diseño de ingeniería", "investigación y desarrollo", "operaciones", "planeamiento", "sistemas"],
-    "en": ["engineering design", "research and development", "operations", "planning", "systems"]
-  },
+  "certifications": [
+    {
+      "name": { "es": "First Certificate in English (FCE), nivel B2 del MCER", "en": "First Certificate in English (FCE), CEFR Level B2" },
+      "issuer": "Cambridge University Press & Assessment",
+      "date": { "es": "diciembre de 2024", "en": "December 2024" }
+    }
+  ],
 
   "labels": {
     "es": {
@@ -163,11 +175,11 @@
         },
         "cv": {
           "education": "Formación",
-          "interests": "Áreas de interés",
           "experience": "Experiencia",
           "projects": "Proyectos",
           "skills": "Habilidades técnicas",
-          "languages": "Idiomas"
+          "languages": "Idiomas",
+          "certifications": "Certificaciones"
         }
       },
       "variant": { "ing": "", "dev": " (Desarrollo)", "cv": "" },
@@ -195,11 +207,11 @@
         },
         "cv": {
           "education": "Education",
-          "interests": "Areas of Interest",
           "experience": "Experience",
           "projects": "Projects",
           "skills": "Technical Skills",
-          "languages": "Languages"
+          "languages": "Languages",
+          "certifications": "Certifications"
         }
       },
       "variant": { "ing": "", "dev": " (Software)", "cv": "" },
