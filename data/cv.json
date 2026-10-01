@@ -33,7 +33,7 @@
       "educationMerge": { "utnMec": "uca" },
       "progress": false,
       "coursework": "dev",
-      "skillOrder": ["programming", "data", "office", "cad", "manufacturing"]
+      "skillOrder": ["programming", "data", "office", "designDev"]
     },
     "cv": {
       "kind": "cv",
@@ -71,7 +71,7 @@
     "tup": {
       "institution": { "es": "Universidad Tecnológica Nacional, Facultad Regional Rosario", "en": "National Technological University, Rosario Regional Faculty" },
       "location": { "es": "Rosario, Argentina", "en": "Rosario, Argentina" },
-      "degree": { "es": "Tecnicatura Universitaria en Programación (plan 2024)", "en": "University Technical Degree in Programming (2024 curriculum)" },
+      "degree": { "es": "Tecnicatura Universitaria en Programación", "en": "University Technical Degree in Programming" },
       "start": "2024",
       "end": null,
       "expected": "2027",
@@ -118,23 +118,28 @@
   },
 
   "skills": {
+    "designDev": {
+      "label": { "es": "Diseño y fabricación", "en": "Design and Manufacturing" },
+      "items": ["SolidWorks", "AutoCAD", { "es": "CNC / código G", "en": "CNC / G-code" }]
+    },
     "cad": {
       "label": { "es": "CAD/CAM", "en": "CAD/CAM" },
-      "items": ["SolidWorks 3D", "SolidWorks CAM", "Solid Edge", "Autodesk Inventor", "Autodesk Fusion", "AutoCAD 2D", "FluidSIM"]
+      "items": ["SolidWorks", "SolidWorks CAM", "Solid Edge", "Autodesk Inventor", "Autodesk Fusion", "AutoCAD"]
     },
     "manufacturing": {
       "label": { "es": "Fabricación", "en": "Manufacturing" },
       "items": [
         { "es": "CNC / código G", "en": "CNC / G-code" },
         { "es": "mecanizado manual (torno, fresadora, soldadura)", "en": "manual machining (lathe, milling, welding)" },
-        "Mach4"
+        { "es": "circuitos neumáticos e hidráulicos (FluidSIM)", "en": "pneumatic and hydraulic circuits (FluidSIM)" },
+        "Mach4", "Arduino"
       ]
     },
     "programming": {
       "label": { "es": "Programación", "en": "Programming" },
       "items": [
         "Python", "JavaScript", "HTML/CSS", "Git/GitHub", "Linux/Bash", "C/C++", "Node.js", "Next.js",
-        "Tailwind CSS", "GitHub Actions", "Docker", "Arduino",
+        "Tailwind CSS", "Docker",
         { "es": "desarrollo asistido por IA (Claude Code)", "en": "AI-assisted development (Claude Code)", "only": ["dev"] }
       ]
     },
@@ -153,7 +158,7 @@
 
   "languages": [
     { "name": { "es": "Español", "en": "Spanish" }, "level": { "es": "nativo", "en": "native" } },
-    { "name": { "es": "Inglés", "en": "English" }, "level": { "es": "B2, Cambridge First Certificate, 2024", "en": "B2, Cambridge First Certificate, 2024" } },
+    { "name": { "es": "Inglés", "en": "English" }, "level": { "es": "B2, First Certificate in English, 2024", "en": "B2, First Certificate in English, 2024" } },
     { "name": { "es": "Italiano", "en": "Italian" }, "level": { "es": "básico", "en": "basic" } },
     { "name": { "es": "Portugués", "en": "Portuguese" }, "level": { "es": "básico", "en": "basic" } }
   ],
