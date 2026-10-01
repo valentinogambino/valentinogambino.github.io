@@ -1,0 +1,182 @@
+{
+  "name": "Valentino Gambino",
+  "siteUrl": "https://valentinogambino.github.io/cv/",
+  "contact": {
+    "email": "gambinovt@gmail.com",
+    "linkedin": "",
+    "location": { "es": "Rosario, Santa Fe, Argentina", "en": "Rosario, Santa Fe, Argentina" }
+  },
+
+  "variants": {
+    "ing": {
+      "path": "",
+      "pdf": "cv-valentino-gambino",
+      "headline": {
+        "es": "Técnico Mecánico · Estudiante de Ingeniería Industrial",
+        "en": "Mechanical Technician · Industrial Engineering Student"
+      },
+      "summary": {
+        "es": "Técnico Mecánico (IPS-UNR) y estudiante de Ingeniería Industrial en la UCA y de la Tecnicatura Universitaria en Programación en la UTN. Formación práctica en diseño CAD/CAM, mecanizado y fabricación, complementada con programación y manejo de datos. Me interesan el diseño de ingeniería, las operaciones, el planeamiento y la investigación y desarrollo.",
+        "en": "Mechanical Technician (IPS-UNR), currently studying Industrial Engineering at UCA and a University Technical Degree in Programming at UTN. Hands-on background in CAD/CAM design, machining and manufacturing, complemented by programming and data skills. Interested in engineering design, operations, planning and R&D."
+      },
+      "sections": ["summary", "experience", "education", "skills", "languages", "interests"],
+      "educationOrder": ["uca", "tup", "ips"],
+      "skillOrder": ["cad", "manufacturing", "programming", "data", "office"]
+    },
+    "dev": {
+      "path": "dev/",
+      "pdf": "cv-valentino-gambino-dev",
+      "headline": {
+        "es": "Estudiante de Programación · Técnico Mecánico",
+        "en": "Programming Student · Mechanical Technician"
+      },
+      "summary": {
+        "es": "Estudiante de la Tecnicatura Universitaria en Programación (UTN) y de Ingeniería Industrial (UCA), con título de Técnico Mecánico. Programo en Python y JavaScript, trabajo con bases de datos SQL y uso Linux, Docker y Git en el día a día. Sumo al desarrollo de software una base de ingeniería en procesos, calidad y fabricación.",
+        "en": "Student of the University Technical Degree in Programming (UTN) and Industrial Engineering (UCA), with a Mechanical Technician degree. I program in Python and JavaScript, work with SQL databases and use Linux, Docker and Git daily. I bring an engineering background in processes, quality and manufacturing to software development."
+      },
+      "sections": ["summary", "experience", "skills", "education", "languages", "interests"],
+      "educationOrder": ["tup", "uca", "ips"],
+      "skillOrder": ["programming", "data", "office", "cad", "manufacturing"]
+    }
+  },
+
+  "experience": [],
+
+  "education": {
+    "uca": {
+      "degree": { "es": "Ingeniería Industrial", "en": "Industrial Engineering" },
+      "institution": { "es": "Pontificia Universidad Católica Argentina (UCA), Rosario", "en": "Pontifical Catholic University of Argentina (UCA), Rosario" },
+      "start": "2024",
+      "end": null,
+      "progress": { "approved": 21, "total": 63 }
+    },
+    "tup": {
+      "degree": { "es": "Tecnicatura Universitaria en Programación (plan 2024)", "en": "University Technical Degree in Programming (2024 curriculum)" },
+      "institution": { "es": "Universidad Tecnológica Nacional (UTN), Facultad Regional Rosario", "en": "National Technological University (UTN), Rosario" },
+      "start": "2024",
+      "end": null,
+      "progress": { "approved": 8, "total": 18 }
+    },
+    "ips": {
+      "degree": { "es": "Técnico Mecánico", "en": "Mechanical Technician" },
+      "institution": { "es": "Instituto Politécnico Superior \"General San Martín\" (UNR)", "en": "Instituto Politécnico Superior \"General San Martín\" (National University of Rosario)" },
+      "start": "2015",
+      "end": "2021",
+      "progress": null
+    }
+  },
+
+  "skills": {
+    "cad": {
+      "label": { "es": "Diseño CAD/CAM", "en": "CAD/CAM design" },
+      "items": [
+        { "name": "SolidWorks 3D", "level": "intermediate" },
+        { "name": "SolidWorks CAM", "level": "intermediate" },
+        { "name": "Solid Edge Community", "level": "intermediate" },
+        { "name": "Autodesk Inventor", "level": "intermediate" },
+        { "name": "Autodesk Fusion", "level": "intermediate" },
+        { "name": "AutoCAD 2D", "level": "intermediate" },
+        { "name": "FluidSIM", "level": "intermediate" }
+      ]
+    },
+    "manufacturing": {
+      "label": { "es": "Fabricación", "en": "Manufacturing" },
+      "items": [
+        { "name": { "es": "CNC / código G", "en": "CNC / G-code" }, "level": "intermediate" },
+        { "name": { "es": "mecanizado manual (torno, fresa, soldadura)", "en": "manual machining (lathe, milling, welding)" }, "level": "intermediate" },
+        { "name": "Mach4", "level": "basic" }
+      ]
+    },
+    "programming": {
+      "label": { "es": "Programación", "en": "Programming" },
+      "items": [
+        { "name": "Python", "level": "intermediate" },
+        { "name": "JavaScript", "level": "intermediate" },
+        { "name": "HTML/CSS", "level": "intermediate" },
+        { "name": "Git/GitHub", "level": "intermediate" },
+        { "name": "Linux/Bash", "level": "intermediate" },
+        { "name": "C/C++", "level": "basic" },
+        { "name": "Node.js", "level": "basic" },
+        { "name": "Next.js", "level": "basic" },
+        { "name": "Tailwind CSS", "level": "basic" },
+        { "name": "GitHub Actions", "level": "basic" },
+        { "name": "Docker", "level": "basic" },
+        { "name": "WSL", "level": "basic" },
+        { "name": "Arduino", "level": "basic" },
+        { "name": { "es": "Desarrollo asistido por IA (Claude Code)", "en": "AI-assisted development (Claude Code)" }, "level": null }
+      ]
+    },
+    "data": {
+      "label": { "es": "Datos y cálculo", "en": "Data and computing" },
+      "items": [
+        { "name": "MySQL", "level": "basic" },
+        { "name": "PostgreSQL", "level": "basic" },
+        { "name": "MATLAB/Octave", "level": "basic" }
+      ]
+    },
+    "office": {
+      "label": { "es": "Gestión y ofimática", "en": "Management and office tools" },
+      "items": [
+        { "name": "Office / Google Workspace", "level": "advanced" },
+        { "name": "Excel", "level": "intermediate" },
+        { "name": { "es": "Modelado de procesos BPM (draw.io)", "en": "BPM process modeling (draw.io)" }, "level": "basic" }
+      ]
+    }
+  },
+
+  "languages": [
+    { "name": { "es": "Inglés", "en": "English" }, "level": { "es": "Avanzado", "en": "Advanced" } },
+    { "name": { "es": "Italiano", "en": "Italian" }, "level": { "es": "Elemental", "en": "Elementary" } },
+    { "name": { "es": "Portugués", "en": "Portuguese" }, "level": { "es": "Elemental", "en": "Elementary" } }
+  ],
+
+  "interests": {
+    "es": ["Diseño de ingeniería", "Investigación y desarrollo", "Operaciones", "Planeamiento", "Sistemas"],
+    "en": ["Engineering design", "Research and development", "Operations", "Planning", "Systems"]
+  },
+
+  "labels": {
+    "es": {
+      "summary": "Perfil",
+      "experience": "Experiencia",
+      "education": "Formación",
+      "skills": "Herramientas y tecnologías",
+      "languages": "Idiomas",
+      "interests": "Áreas de interés",
+      "present": "actualidad",
+      "progress": "{approved} de {total} materias aprobadas",
+      "levels": { "basic": "básico", "intermediate": "intermedio", "advanced": "avanzado" },
+      "downloadPdf": "Descargar PDF",
+      "otherLang": "English",
+      "controls": "Idioma y descarga",
+      "email": "Email",
+      "location": "Ubicación",
+      "linkedin": "LinkedIn",
+      "revision": "Rev.",
+      "titleSuffix": { "ing": "", "dev": " (Desarrollo)" },
+      "updated": "Actualizado",
+      "months": ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"]
+    },
+    "en": {
+      "summary": "Profile",
+      "experience": "Experience",
+      "education": "Education",
+      "skills": "Tools and technologies",
+      "languages": "Languages",
+      "interests": "Areas of interest",
+      "present": "present",
+      "progress": "{approved} of {total} courses passed",
+      "levels": { "basic": "basic", "intermediate": "intermediate", "advanced": "advanced" },
+      "downloadPdf": "Download PDF",
+      "otherLang": "Español",
+      "controls": "Language and download",
+      "email": "Email",
+      "location": "Location",
+      "linkedin": "LinkedIn",
+      "revision": "Rev.",
+      "titleSuffix": { "ing": "", "dev": " (Software)" },
+      "updated": "Updated",
+      "months": ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+    }
+  }
+}
