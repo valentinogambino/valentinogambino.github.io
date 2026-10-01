@@ -1,184 +1,155 @@
 ---
 name: CV Valentino Gambino
-description: CV como hoja de plano técnico, apto para ATS, en web y PDF A4.
+description: CV en formato MIT (CAPD), apto para ATS, en web y PDF A4 de una página.
 colors:
-  teal-ink: "oklch(45% 0.085 200)"
-  teal-wash: "oklch(94% 0.025 200)"
-  graphite: "oklch(23% 0.012 240)"
-  graphite-soft: "oklch(43% 0.014 240)"
-  frame-line: "oklch(30% 0.012 240)"
-  hairline: "oklch(84% 0.01 230)"
-  sheet: "oklch(100% 0 0)"
-  desk: "oklch(95.5% 0.006 230)"
+  ink: "#111111"
+  ink-soft: "#444444"
+  rule: "#111111"
+  paper: "#ffffff"
+  selection: "#e4e4e4"
 typography:
   display:
-    fontFamily: "Barlow Semi Condensed, Barlow, Segoe UI, system-ui, sans-serif"
-    fontSize: "clamp(2rem, 1.35rem + 2.8vw, 2.875rem)"
+    fontFamily: "Tinos, Times New Roman, Times, serif"
+    fontSize: "1.7rem"
     fontWeight: 700
-    lineHeight: 1
-    letterSpacing: "-0.015em"
+    lineHeight: 1.1
+    letterSpacing: "0.02em"
+    fontFeature: "smcp"
   headline:
-    fontFamily: "Barlow Semi Condensed, Barlow, Segoe UI, system-ui, sans-serif"
-    fontSize: "0.9375rem"
-    fontWeight: 600
-    letterSpacing: "0.09em"
-  title:
-    fontFamily: "Barlow Semi Condensed, Barlow, Segoe UI, system-ui, sans-serif"
-    fontSize: "1.125rem"
-    fontWeight: 600
-    lineHeight: 1.25
+    fontFamily: "Tinos, Times New Roman, Times, serif"
+    fontSize: "1rem"
+    fontWeight: 700
   body:
-    fontFamily: "Barlow, Segoe UI, system-ui, sans-serif"
+    fontFamily: "Tinos, Times New Roman, Times, serif"
     fontSize: "1rem"
     fontWeight: 400
-    lineHeight: 1.5
-    fontFeature: "tnum"
+    lineHeight: 1.38
   label:
-    fontFamily: "Barlow Semi Condensed, Barlow, Segoe UI, system-ui, sans-serif"
-    fontSize: "0.6875rem"
-    fontWeight: 600
-    letterSpacing: "0.08em"
+    fontFamily: "Tinos, Times New Roman, Times, serif"
+    fontSize: "0.9375rem"
+    fontWeight: 400
 rounded:
   none: "0"
 spacing:
-  row: "0.875rem"
-  gap: "1.5rem"
-  section: "2.25rem"
-  sheet: "clamp(1.25rem, 0.6rem + 3vw, 3rem)"
+  entry: "0.7rem"
+  section: "1rem"
+  label-column: "7.25rem"
+  column-gap: "1.25rem"
 components:
-  title-block-cell:
-    backgroundColor: "{colors.sheet}"
-    textColor: "{colors.graphite}"
-    rounded: "{rounded.none}"
-    padding: "0.5rem 0.875rem"
-  revision-cell:
-    backgroundColor: "{colors.teal-wash}"
-    textColor: "{colors.teal-ink}"
-    rounded: "{rounded.none}"
-    padding: "0.5rem 0.875rem"
   text-link:
-    textColor: "{colors.teal-ink}"
+    textColor: "{colors.ink}"
 ---
 
 # Design System: CV Valentino Gambino
 
 ## Overview
 
-**Creative North Star: "La hoja de plano"**
+**Creative North Star: "El CV de MIT"**
 
-El CV se lee como una lámina de dibujo técnico. El marco es una línea fina
-doble y el encabezado es un rótulo (title block, ISO 7200) con nombre,
-contacto y número de revisión, en lugar del "hero" de currículum. Es denso
-y sobrio. La jerarquía sale del peso tipográfico, de las líneas y de una
-sola tinta de acento. Todo es texto real en una columna, así que lo que ve
-un reclutador es lo mismo que lee un ATS.
+El CV sigue el formato que recomienda MIT Career Advising & Professional
+Development (CAPD) y sus CV de ejemplo:
 
-La revisión semestral es parte del lenguaje visual: `Rev. AAAA-S` aparece en
-el rótulo y en el pie, como en un plano.
+- serif conservadora entre 10 y 12pt;
+- márgenes uniformes;
+- una página;
+- negrita solo en datos clave;
+- títulos de sección en una columna angosta a la izquierda;
+- institución y lugar en una línea, título y fechas en la siguiente.
+
+No hay color ni ornamentos: la autoridad sale de lo convencional. Todo el
+texto es real y está en el orden de lectura, así que un ATS lo lee tal
+cual.
 
 **Key Characteristics:**
-- Rótulo enmarcado con celdas etiquetadas; la celda de revisión va lavada en teal.
-- Una columna, sin íconos, sin barras de nivel; los niveles se escriben en palabras.
-- Barlow Semi Condensed para los títulos, Barlow para el texto y numerales tabulares.
-- Esquinas rectas en todo.
-- La versión impresa A4 es la misma hoja sin controles, en una página.
+- Nombre centrado en versalitas, línea de contacto centrada y una regla negra debajo.
+- Etiquetas de sección a la izquierda, contenido a la derecha; en móvil la etiqueta pasa arriba.
+- Institución en negrita y título en cursiva; lugar y fechas alineados a la derecha.
+- Habilidades en una línea por categoría, con niveles escritos al estilo MIT ("proficient in…; familiar with…").
+- La impresión A4 es la misma página, en 11pt y con márgenes de 19mm.
 
 ## Colors
 
-Grafito sobre hoja blanca, con una única tinta teal. Estrategia restringida:
-neutros más un acento.
-
-### Primary
-- **Tinta teal** (teal-ink): títulos de sección, links, número de revisión y anillo de foco. Es el único color con croma.
-- **Lavado teal** (teal-wash): fondo de la celda de revisión y color de selección de texto.
+Tinta negra sobre papel blanco, sin acento.
 
 ### Neutral
-- **Grafito** (graphite): el texto.
-- **Grafito suave** (graphite-soft): instituciones, fechas, etiquetas del rótulo y niveles.
-- **Línea de marco** (frame-line): marco de la hoja, bordes del rótulo y raya del pie.
-- **Línea fina** (hairline): divisiones internas del rótulo y la raya que sigue a cada título de sección.
-- **Hoja** (sheet) y **mesa** (desk): el papel y el fondo frío que lo rodea en pantalla.
+- **Tinta** (ink): todo el texto y las reglas.
+- **Tinta suave** (ink-soft): solo la fecha de actualización y, en móvil, el lugar y las fechas.
+- **Papel** (paper): el fondo, tanto en pantalla como impreso.
+- **Selección** (selection): gris claro para el texto seleccionado.
 
-**The One Ink Rule.** El teal solo marca la estructura (títulos, revisión,
-links). Nunca va en bloques de texto ni en fondos grandes.
+**The No Color Rule.** MIT recomienda un CV conservador: nada de color, ni
+siquiera en los links, que van en tinta y subrayados.
 
 ## Typography
 
-**Display Font:** Barlow Semi Condensed (con Barlow y Segoe UI)
-**Body Font:** Barlow (con Segoe UI y system-ui)
+**Body Font:** Tinos (métricamente compatible con Times New Roman), con Times New Roman de respaldo.
 
-**Character:** Una grotesca de cartelería vial e industrial. La versión
-semicondensada da la voz de rótulo de plano; la normal da legibilidad de
-lectura.
+**Character:** Es la serif de documento formal por excelencia. Un solo tipo
+para todo; la jerarquía sale de la negrita, la cursiva y las versalitas.
 
 ### Hierarchy
-- **Display** (700, clamp 2–2.875rem, 1): solo el nombre, dentro del rótulo.
-- **Headline** (600, 0.9375rem, 0.09em, mayúsculas, teal): títulos de sección, seguidos de una línea fina hasta el borde.
-- **Title** (600, 1.125rem, 1.25): carrera o puesto en cada entrada.
-- **Body** (400, 1rem, 1.5, numerales tabulares): texto; el perfil limitado a 68ch.
-- **Label** (600, 0.6875rem, 0.08em, mayúsculas, grafito suave): etiquetas de campo del rótulo.
+- **Display** (700, 1.7rem, versalitas): solo el nombre.
+- **Headline** (700, 1rem): etiquetas de sección ("Formación", "Habilidades e intereses").
+- **Body** (400, 1rem, 1.38): todo el contenido. En el PDF, 11pt.
+- **Label** (400, 0.9375rem): la línea de contacto.
 
-**The Label Is A Field Rule.** Las etiquetas en mayúsculas pequeñas solo
-nombran campos del rótulo. Nunca van como "eyebrow" arriba de un título.
+**The Bold Sparingly Rule.** La negrita queda reservada para el nombre, las
+etiquetas de sección, las instituciones y los rótulos de línea
+("CAD/CAM:", "Materias relevantes:"). Esa es la regla textual de MIT.
 
 ## Layout
 
-Una columna de hasta 50rem centrada sobre la mesa. El padding de la hoja es
-fluido. El rótulo es una grilla de dos columnas (1.7fr / 1fr). Las entradas
-llevan la fecha alineada a la derecha. Las herramientas son una grilla de
-categoría (11rem) más contenido. Por debajo de 40rem, todo pasa a una
-columna: el rótulo se apila y las fechas bajan debajo del título. Funciona
-sin scroll horizontal a 360 y 402px. Los bordes usan
-`env(safe-area-inset-*)`.
+Una columna de 50rem centrada. Cada sección es una grilla con la etiqueta en
+7.25rem y el contenido al lado, con 1.25rem de separación. Cada entrada es
+una grilla de dos columnas: a la izquierda, institución y título; a la
+derecha, lugar y fechas. Las líneas de detalle ocupan el ancho completo.
+Las líneas de habilidades usan sangría francesa de 1em.
 
-Impresión: A4 con márgenes de 13–15mm y raíz de 10.5pt. Los controles se
-ocultan. Las entradas no se cortan entre páginas. Tiene que entrar en 1
-página.
+Por debajo de 40rem, la etiqueta pasa arriba con una regla; el lugar y las
+fechas bajan en gris, en este orden: institución, lugar, título, fechas,
+detalle. La línea de contacto se apila. No hay scroll horizontal a 360 ni a
+402px, y los bordes usan `env(safe-area-inset-*)`.
 
-**The One Sheet Rule.** Si un cambio de contenido manda el PDF a una segunda
-página, se ajusta primero el espaciado de impresión, no el texto.
+**The One Page Rule.** Los 4 PDF tienen que entrar en una página A4. Si el
+contenido crece, primero se ajusta el espaciado de impresión. El tamaño de
+letra nunca baja de 10pt (mínimo de MIT).
 
 ## Elevation & Depth
 
-Plana. No hay sombras. La profundidad sale de líneas: el marco doble
-(borde + outline a 5px) separa la hoja de la mesa, y los bordes de 1px
-arman el rótulo.
+Plana. No hay sombras ni fondos: solo una regla negra de 1px bajo el
+encabezado y, en móvil, bajo cada etiqueta.
 
 ## Shapes
 
-Esquinas rectas en todo (0). Formas rectangulares de lámina técnica: marcos,
-celdas y rayas.
+Sin formas: no hay cajas, tarjetas ni bordes redondeados. Es tipografía
+sobre papel.
 
 ## Components
 
-### Rótulo (signature)
-Grilla enmarcada en línea de marco. A la izquierda va el nombre (Display) y
-el subtítulo; cada rol del subtítulo queda sin cortes y las líneas solo se
-parten en el separador "·". A la derecha van los campos etiquetados (email,
-ubicación, LinkedIn si existe), separados por líneas finas. Abajo, la celda
-de revisión con fondo lavado y el código en teal.
-
-### Links
-Teal con subrayado de 1px y offset de 0.2em. Al pasar el mouse, el
-subrayado sube a 2px. El foco es un outline teal de 2px con offset de 3px.
-En impresión van en grafito, sin subrayado.
-
-### Controles (idioma / PDF)
-Links de texto en Semi Condensed, mayúsculas y teal, alineados a la derecha
-fuera de la hoja. Se ocultan al imprimir.
+### Encabezado
+El nombre va centrado en versalitas negrita. Debajo, una línea centrada con
+ciudad • email • LinkedIn (si existe), y luego la regla negra a ancho
+completo.
 
 ### Entrada (formación / experiencia)
-Título más fecha a la derecha; abajo, la institución en grafito suave y la
-nota de avance.
+Primera línea: institución en negrita, con el lugar a la derecha. Segunda
+línea: título en cursiva, con las fechas a la derecha. Después, el avance,
+la nota y el promedio en una línea, y "Materias relevantes:" con el rótulo
+en negrita.
+
+### Links y controles
+En tinta, subrayados con 1px y offset de 0.18em; al pasar el mouse, 2px.
+El foco es un outline negro de 2px. Los controles "English · Descargar PDF"
+van arriba a la derecha y se ocultan al imprimir.
 
 ## Do's and Don'ts
 
 ### Do:
-- **Do** escribir los niveles en palabras ("Intermedio: …"), agrupando los ítems del mismo nivel.
-- **Do** mantener el número de revisión en el rótulo y en el pie.
-- **Do** verificar que cada PDF tenga 1 página y que las páginas no tengan scroll horizontal a 402px después de cada cambio.
+- **Do** mantener una serif conservadora entre 10 y 12pt en el PDF (11pt hoy).
+- **Do** listar la formación en orden cronológico inverso, con una línea de "Materias relevantes" por carrera.
+- **Do** escribir los niveles con la redacción MIT: "manejo intermedio de…; conocimientos básicos de…" / "proficient in…; familiar with…".
 
 ### Don't:
-- **Don't** usar íconos, barras o anillos de nivel, ni una barra lateral (elección explícita del dueño por ATS).
-- **Don't** redondear esquinas ni agregar sombras.
-- **Don't** poner etiquetas tipo eyebrow arriba de los títulos de sección.
+- **Don't** agregar color, íconos, barras de nivel, foto ni una barra lateral.
+- **Don't** incluir datos personales (edad, documento, estado civil) ni "referencias a pedido". Es regla de MIT y de este proyecto.
+- **Don't** usar negrita fuera de los casos de la regla de arriba.
